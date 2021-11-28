@@ -13,6 +13,6 @@ class Volvo240 extends Car {
         dir = 45;
     }
     public double speedFactor(){
-        return enginePower * 0.01 * trimFactor;
+        return engine.enginePower * 0.01 * trimFactor;
     }
 }

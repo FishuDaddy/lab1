@@ -1,8 +1,8 @@
-import org.junit.Test;
+import org.testng.annotations.Test;
 import java.awt.*;
 import java.security.InvalidParameterException;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static org.junit.Assert.*;
 
 public class CarTest {
 
@@ -15,7 +15,7 @@ public class CarTest {
 
     @Test
     public void volvo_engine_100(){
-        assertEquals(100, volvo.getEnginePower(), 0.01);
+        assertEquals(100, volvo.engine.getEnginePower(), 0.01);
     }
 
     @Test
@@ -64,7 +64,7 @@ public class CarTest {
         Volvo240 volvo = new Volvo240();
         volvo.toggleEngine(); // Turns the engine on
         volvo.toggleEngine(); // Should turn the engine back off
-        assertFalse(volvo.engineOn);
+        assertFalse(volvo.engine.engineOn);
     }
     @Test
     public void brake_should_lower_currentSpeed() throws InvalidParameterException {

@@ -18,7 +18,7 @@ public class Scania extends Car{
     @Override
     public double speedFactor() {
         if (!isStationary && !ramp.platformRaised) {
-            return enginePower * 0.01;
+            return engine.enginePower * 0.01;
         } else {
             return 0; // Vehicle can't move while platform is raised
         }
