@@ -34,7 +34,7 @@ abstract class Car implements Movable {
     protected void setColor(Color clr) {color = clr;}
 
     protected void toggleEngine(){
-        engine.toggleEngine();
+        engine.engineToggle();
         if (engine.engineOn){
             currentSpeed = 0.1;
         } else {
