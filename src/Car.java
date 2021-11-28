@@ -15,11 +15,18 @@ abstract class Car implements Movable {
     protected int dir; // The Car's direction in Degrees, subject to tweaks
     protected Engine engine;
 
+    /**
+     * Constructor for the rudimentary parts of a car- like object
+     * @param nrDoors The vehicle's number of doors
+     * @param enginePower The vehicles' engine power
+     * @param color the vehicles color
+     * @param modelName the vehicles model name
+     */
     protected void assembler(int nrDoors, int enginePower, Color color, String modelName) {
         this.nrDoors = nrDoors;
         this.color = color;
         this.modelName = modelName;
-        Engine engine = new Engine(enginePower);
+        this.engine = new Engine(enginePower);
     }
 
     public int getNrDoors(){

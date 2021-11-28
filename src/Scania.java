@@ -10,6 +10,9 @@ public class Scania extends Car{
 
     Ramp ramp = new Ramp(5, 70); // Delegation of object Ramp
 
+    /**
+     * Constructor for creating an object of Scania type vehicle
+     */
     public Scania() {
         assembler(2, 200, Color.black, "Scania");
         isStationary = false;

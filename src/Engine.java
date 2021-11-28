@@ -7,6 +7,10 @@ public class Engine {
     protected boolean engineOn;
     protected int enginePower;
 
+    /**
+     * Constructor for an Engine object which is used to handle engine appropriate events
+     * @param enginePower The engines maximum power output
+     */
     public Engine(int enginePower) {
         engineOn = false;
         this.enginePower = enginePower;

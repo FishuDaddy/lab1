@@ -8,6 +8,9 @@ class Saab95 extends Car {
     
     protected boolean turboOn;
 
+    /**
+     * Constructor for creating a Saab95 object
+     */
     public Saab95() {
         assembler(2, 125, Color.red, "Saab95");
         turboOn = false;

@@ -1,9 +1,21 @@
+/**
+ * Represents a Ramp which can be raised and lowered
+ *
+ */
+
 public class Ramp implements Rampable {
 
     protected int platformAngle;
     protected boolean platformRaised;
     protected int angleChange;
     protected int angleLimit;
+
+
+    /**
+     * Constructor for creating an object of type Ramp
+     * @param angleChange The incremental change of which the platform is raised- or lowered
+     * @param angleLimit The maximum angle that the platform is allowed to be raised to
+     */
 
     public Ramp(int angleChange, int angleLimit) {
         platformRaised = false;
