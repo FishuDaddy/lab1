@@ -3,16 +3,15 @@
  *
  */
 
-abstract public class Ramp implements Rampable {
+abstract public class Ramp {
 
-    protected boolean platformRaised;
+    protected boolean platformRaised; // Is the platform activated or not?**
 
+    /**
+     * Constructor that creates the base ramp which starts as not raised
+     */
     protected void ramp() {
         platformRaised = false;
     }
-
-
-    abstract public void raisePlatform() throws Exception;
-    abstract public void lowerPlatform() throws Exception;
 
 }

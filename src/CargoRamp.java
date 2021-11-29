@@ -1,3 +1,6 @@
+/**
+ * Represents a Cargo ramp which can be raised and lowered to haul cargo
+ */
 public class CargoRamp extends Ramp {
 
     protected int angleChange;
@@ -9,14 +12,12 @@ public class CargoRamp extends Ramp {
         this.angleChange = angleChange;
         this.angleLimit = angleLimit;
         this.platformAngle = 0;
-
     }
 
     public int getPlatformAngle() {
         return platformAngle;
     }
 
-    @Override
     public void raisePlatform() throws Exception{
         if (platformRaised && platformAngle < angleLimit) {
             platformAngle += angleChange;
@@ -27,7 +28,6 @@ public class CargoRamp extends Ramp {
         }
     }
 
-    @Override
     public void lowerPlatform() throws Exception {
         if (platformRaised && platformAngle > 0) {
             platformAngle -= angleChange;
@@ -36,6 +36,8 @@ public class CargoRamp extends Ramp {
         } else {
             throw new Exception("Platform needs to be raised before use");
         }
-
     }
+
+
+
 }
