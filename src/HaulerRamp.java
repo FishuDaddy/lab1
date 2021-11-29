@@ -1,14 +1,14 @@
-import java.util.ArrayList;
+import java.util.Stack;
 
 public class HaulerRamp extends Ramp{
 
     protected int carLimit;
-    protected ArrayList<Object> load;
+    protected Stack<Object> load;
 
     public HaulerRamp(int carLimit) {
         ramp();
         this.carLimit = carLimit; // The maximum amount of cars that can be loaded
-        this.load = new ArrayList<>(); // Creates an array (with the size carLimit) that will store the loaded cars information
+        load = new Stack<>(); // Creates a stack datastructure for the loading- and unloading of cars
     }
     @Override
     public void raisePlatform() throws Exception {
