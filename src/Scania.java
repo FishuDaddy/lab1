@@ -8,10 +8,10 @@ public class Scania extends Car{
 
     protected boolean isStationary;
 
-    Ramp ramp = new Ramp(5, 70); // Delegation of object Ramp
+    CargoRamp ramp = new CargoRamp(5, 70); // Delegation of object Ramp
 
     /**
-     * Constructor for creating an object of Scania type vehicle
+     * Constructor for creating an object of a Scania type vehicle with a ramp
      */
     public Scania() {
         assembler(2, 200, Color.black, "Scania");
@@ -27,16 +27,12 @@ public class Scania extends Car{
         }
     }
 
-    public int getPlatformAngle() {
-        return ramp.getPlatformAngle();
-    }
-
     public boolean getState() {
         return isStationary;
     }
 
-    public boolean toggleStationary() {
-        return isStationary = currentSpeed == 0; // checks if currentSpeed is 0
+    public void toggleStationary() {
+        isStationary = currentSpeed == 0; // checks if currentSpeed is 0
     }
 
     public void togglePlatform() throws Exception {
