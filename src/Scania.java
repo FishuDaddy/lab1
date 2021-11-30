@@ -11,7 +11,7 @@ public class Scania extends CarTransport {
      */
     public Scania() {
         commonAssembler(2, 200, Color.black, "Scania", 19000);
-        transportAssembler(40000, 10);
+        transportAssembler(40000, 10, 10);
         platformRaised = false;
         platformAngle = 0;
     }

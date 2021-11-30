@@ -1,4 +1,4 @@
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 import java.awt.*;
 import java.security.InvalidParameterException;
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,7 +36,7 @@ public class Saab95test {
     }
     @Test
     public void saab_enginePower() {
-        assertEquals(125, saab.engine.enginePower, 0.01);
+        assertEquals(125, saab.getEnginePower(), 0.01);
     }
 
     @Test

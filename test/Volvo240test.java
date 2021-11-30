@@ -1,4 +1,4 @@
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 import java.awt.*;
 import java.security.InvalidParameterException;
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +15,7 @@ public class Volvo240test {
     }
     @Test
     public void volvo_enginePower() {
-        assertEquals(100, volvo.engine.enginePower, 0.01);
+        assertEquals(100, volvo.getEnginePower(), 0.01);
     }
 
     @Test

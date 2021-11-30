@@ -6,22 +6,23 @@ abstract class CarTransport extends MotorVehicle {
     protected int maxWeight;
     protected int capacity;
     protected int currentTransportedVehicles;
+    protected int loadThreshold;
     protected boolean isStationary;
     List<Transportable> onTransport;
 
-    public int getTransportedWeight() {
+    protected int getTransportedWeight() {
         return transportedWeight;
     }
-
-    public int getMaxWeight() {
+    protected int getMaxWeight() {
         return maxWeight;
     }
-
-    public int getCapacity() {
+    protected int getCapacity() {
         return capacity;
     }
-
-    public int getCurrentTransportedVehicles() {
+    protected int getThreshold() {
+        return loadThreshold;
+    }
+    protected int getCurrentTransportedVehicles() {
         return currentTransportedVehicles;
     }
 
@@ -32,16 +33,34 @@ abstract class CarTransport extends MotorVehicle {
     public int netWeight() {
         return  weight + transportedWeight;
     }
-    protected void transportAssembler(int maxWeight, int capacity) {
+    protected void transportAssembler(int maxWeight, int capacity, int loadThreshold) {
         this.maxWeight = maxWeight;
         this.capacity = capacity;
+        this.loadThreshold = loadThreshold;
         this.isStationary = true;
         onTransport = new ArrayList<>();
     }
 
-    public boolean canBeLoaded(int weight) {
-        if (isNotFull()){
-            return isNotTooHeavy(weight);
+    public boolean canBeLoaded(Transportable target) {
+        if (isWithinThreshold(target)) {
+            if (isNotFull()) {
+                return isNotTooHeavy(target.getWeight());
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if the target is within 10 coordinates x and y.
+     * @param target the target which coordinates is compared to the location of the transport.
+     * @return true if the condition is met, false if not.
+     */
+    private boolean isWithinThreshold(Transportable target) {
+        if (target.getX() <= this.getX() + this.loadThreshold  || target.getX() >= this.getX() + this.loadThreshold) {
+            return target.getY() <= this.getX() + this.loadThreshold || target.getY() >= this.getY() + this.loadThreshold;
         } else {
             return false;
         }

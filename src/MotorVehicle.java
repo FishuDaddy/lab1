@@ -10,7 +10,7 @@ abstract class MotorVehicle implements Movable {
     protected String modelName; // The car model name
     protected double x;
     protected double y;
-    protected int dir; // The Car's direction in Degrees, subject to tweaks
+    protected double dir; // The Car's direction in Degrees, subject to tweaks
     protected boolean engineOn;
 
     protected void commonAssembler(int nrDoors, int enginePower, Color color, String modelName, int weight) {
@@ -35,6 +35,28 @@ abstract class MotorVehicle implements Movable {
         return color;
     }
     protected void setColor(Color clr) {color = clr;}
+    public double getX() {
+        return x;
+    }
+    public double getY() {
+        return y;
+    }
+    public void setX(double x) {
+        this.x = x;
+    }
+    public void setY(double y) {
+        this.y = y;
+    }
+    public void setCoordinates(int x, int y) {
+        setX(x);
+        setY(y);
+    }
+    public void setDirection(double direction) {
+        this.dir = direction;
+    }
+    public double getDirection(){
+        return dir;
+    }
 
     protected void toggleEngine(){
         if (!engineOn){

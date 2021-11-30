@@ -4,7 +4,7 @@ abstract class MediumSizedCar extends MotorVehicle implements Transportable {
     }
 
     public void load(CarTransport transport) {
-        if (transport.canBeLoaded(weight)) {
+        if (transport.canBeLoaded(this)) {
             transport.load(this);
         }
     }

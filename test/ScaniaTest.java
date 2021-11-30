@@ -1,4 +1,4 @@
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 import java.awt.*;
 import java.security.InvalidParameterException;
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,7 +13,7 @@ public class ScaniaTest {
     @Test
     public void enginePowerShouldBe200() {
         Scania scania = new Scania();
-        assertEquals(200, scania.engine.enginePower, 0.01);
+        assertEquals(200, scania.getEnginePower(), 0.01);
     }
     @Test
     public void colorShouldBeBlack() {
