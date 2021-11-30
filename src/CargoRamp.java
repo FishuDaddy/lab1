@@ -7,6 +7,11 @@ public class CargoRamp extends Ramp {
     protected int angleLimit;
     protected int platformAngle;
 
+    /**
+     * Creates a cargo ramp with parameters for angleChange and the ramps angleLimit
+     * @param angleChange The change in the ramps angle per operation of lowering or raising
+     * @param angleLimit The limit of which the ramp can be raised
+     */
     public CargoRamp(int angleChange, int angleLimit) {
         ramp();
         this.angleChange = angleChange;

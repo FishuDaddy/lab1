@@ -1,11 +1,16 @@
 import java.awt.*;
-import java.util.Iterator;
 
+/**
+ * Class representing a Truck with ramp able to haul vehicles
+ */
 public class CarCarrier extends CarTransport {
 
     protected HaulerRamp carrierRamp;
-    private int unloadOffset = 20;
 
+    /**
+     * Creates the Car transport with a rudimentary parts and transport ramp
+     * @param carLimit The maximum amount of cars the transport ramp can hold
+     */
     public CarCarrier(int carLimit) {
         commonAssembler(2, 250, Color.cyan, "KingDaddyHauler", 4000);
         transportAssembler(8000);
@@ -34,6 +39,7 @@ public class CarCarrier extends CarTransport {
         return currentWeight + vehicle.weight <= maxWeight;
     }
     private void unloadBehind(MotorVehicle unloadedCar) { // Makes it so that the car is unloaded behind the carrier regardless of direction
+        final int unloadOffset = 20; // subject to tweaks
         unloadedCar.x -= unloadOffset * Math.cos(Math.toRadians(this.dir));
         unloadedCar.y += unloadOffset * Math.sin(Math.toRadians(this.dir));
     }
