@@ -18,8 +18,9 @@ public class CargoRamp extends Ramp {
         return platformAngle;
     }
 
-    public void raisePlatform() throws Exception{
-        if (platformRaised && platformAngle < angleLimit) {
+    @Override
+    public void raiseRamp() throws Exception {
+        if (platformUse && platformAngle < angleLimit) {
             platformAngle += angleChange;
         } else if (platformAngle >= angleLimit) {
             throw new Exception("Platform cannot be raised above 70 degrees");
@@ -27,9 +28,9 @@ public class CargoRamp extends Ramp {
             throw new Exception("Platform needs to be raised before use");
         }
     }
-
-    public void lowerPlatform() throws Exception {
-        if (platformRaised && platformAngle > 0) {
+    @Override
+    public void lowerRamp() throws Exception {
+        if (platformUse && platformAngle > 0) {
             platformAngle -= angleChange;
         } else if (platformAngle <= 0) {
             throw new Exception("Platform cannot be lowered below 0 degrees");

@@ -8,7 +8,7 @@ public class HaulerRamp extends Ramp{
 
     protected boolean rampDown;
     protected int carLimit;
-    protected Stack<Object> load;
+    protected Stack<Object> onTransport;
 
     /**
      * Constructor for creating a hauler ramp with a set limit of cars allowed at a time
@@ -17,9 +17,34 @@ public class HaulerRamp extends Ramp{
     public HaulerRamp(int carLimit) {
         ramp();
         this.carLimit = carLimit; // The maximum amount of cars that can be loaded
-        load = new Stack<>(); // Creates a stack datastructure for the loading- and unloading of cars
+        onTransport = new Stack<>(); // Creates a stack datastructure for the loading- and unloading of cars
         rampDown = false; // Ramp starts off as up
     }
 
+    public String getCurrentLoad() {
+        return "Current load >" + onTransport;
+    }
 
+
+    @Override
+    public void raiseRamp() throws Exception {
+        if (platformUse && rampDown) {
+            rampDown = false;
+        } else if (platformUse) {
+            throw new Exception("Platform is already raised");
+        } else {
+            throw new Exception("Platform need to be in use before operation");
+        }
+    }
+
+    @Override
+    public void lowerRamp() throws Exception {
+        if (platformUse && !rampDown) {
+            rampDown = true;
+        } else if (platformUse) {
+            throw new Exception("Platform is already lowered");
+        } else {
+            throw new Exception("Platform need to be in use before operation");
+        }
+    }
 }

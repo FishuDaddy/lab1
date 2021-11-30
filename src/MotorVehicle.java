@@ -5,7 +5,7 @@ import java.security.InvalidParameterException;
  * Abstract class with common methods and attributes for implementation of a Car-like object
  */
 
-abstract class Car implements Movable {
+abstract class MotorVehicle implements Movable {
     protected int nrDoors; // Number of doors on the car
     protected double currentSpeed; // The current speed of the car
     protected Color color; // Color of the car
@@ -14,6 +14,8 @@ abstract class Car implements Movable {
     protected double y;
     protected int dir; // The Car's direction in Degrees, subject to tweaks
     protected Engine engine;
+    protected int weight; // Weight in kg
+    protected boolean isStationary;
 
     /**
      * Constructor for the rudimentary parts of a car- like object
@@ -22,11 +24,13 @@ abstract class Car implements Movable {
      * @param color the vehicles' color
      * @param modelName the vehicles' model name
      */
-    protected void assembler(int nrDoors, int enginePower, Color color, String modelName) {
+    protected void commonAssembler(int nrDoors, int enginePower, Color color, String modelName, int weight) {
         this.nrDoors = nrDoors;
         this.color = color;
         this.modelName = modelName;
         this.engine = new Engine(enginePower);
+        this.weight = weight;
+        this.isStationary = true;
     }
 
     public int getNrDoors(){
@@ -75,6 +79,9 @@ abstract class Car implements Movable {
         } else {
             throw new InvalidParameterException("Please input an amount in the interval [0,1]");
         }
+    }
+    public boolean isStationary() {
+        return currentSpeed == 0; // checks if currentSpeed is 0
     }
 
     @Override

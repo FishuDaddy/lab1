@@ -4,7 +4,7 @@ import java.awt.*;
  * Represents a car of the model Saab95
  */
 
-class Saab95 extends Car {
+class Saab95 extends MediumCar {
     
     protected boolean turboOn;
 
@@ -12,7 +12,7 @@ class Saab95 extends Car {
      * Constructor for creating a Saab95 object
      */
     public Saab95() {
-        assembler(2, 125, Color.red, "Saab95");
+        commonAssembler(2, 125, Color.red, "Saab95", 2000);
         turboOn = false;
         dir = 45;
     }
