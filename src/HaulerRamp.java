@@ -8,7 +8,7 @@ public class HaulerRamp extends Ramp{
 
     protected boolean rampDown;
     protected int carLimit;
-    protected Stack<Object> onTransport;
+    protected Stack<MotorVehicle> onTransport;
 
     /**
      * Constructor for creating a hauler ramp with a set limit of cars allowed at a time
@@ -47,4 +47,8 @@ public class HaulerRamp extends Ramp{
             throw new Exception("Platform need to be in use before operation");
         }
     }
+    public boolean notFull() {
+        return onTransport.size() < carLimit;
+    }
+
 }

@@ -43,7 +43,12 @@ abstract class MotorVehicle implements Movable {
         return color;
     }
     protected void setColor(Color clr) {color = clr;}
-
+    protected boolean isStationary() {
+        return currentSpeed == 0; // checks if currentSpeed is 0
+    }
+    protected int getWeight() {
+        return weight;
+    }
     protected void toggleEngine(){
         engine.engineToggle();
         if (engine.engineOn){
@@ -79,9 +84,6 @@ abstract class MotorVehicle implements Movable {
         } else {
             throw new InvalidParameterException("Please input an amount in the interval [0,1]");
         }
-    }
-    public boolean isStationary() {
-        return currentSpeed == 0; // checks if currentSpeed is 0
     }
 
     @Override

@@ -8,5 +8,4 @@ abstract public class CarTransport extends MotorVehicle {
         this.currentWeight = 0;
     }
 
-
 }
