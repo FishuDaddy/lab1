@@ -1,18 +1,10 @@
 import java.awt.*;
 
-/**
- * Represents a car of the model Saab95
- */
-
-class Saab95 extends Car {
-    
+class Saab95 extends MediumSizedCar {
     protected boolean turboOn;
 
-    /**
-     * Constructor for creating a Saab95 object
-     */
     public Saab95() {
-        assembler(2, 125, Color.red, "Saab95");
+        commonAssembler(2, 125, Color.red, "Saab95", 1610);
         turboOn = false;
         dir = 45;
     }
@@ -24,10 +16,10 @@ class Saab95 extends Car {
 	    turboOn = false;
     }
     
-    public double speedFactor(){
+    double speedFactor() {
         double turbo = 1;
         if(turboOn) turbo = 1.3;
-        return engine.enginePower * 0.01 * turbo;
+        return enginePower * 0.01 * turbo;
     }
 
 

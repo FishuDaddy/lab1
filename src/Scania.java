@@ -1,40 +1,49 @@
 import java.awt.*;
+import java.util.ArrayList;
 
-/**
- * Represents a Scania Vehicle with a liftable platform
- */
+public class Scania extends CarTransport {
 
-public class Scania extends Car {
-
-    CargoRamp ramp;
+    protected boolean platformRaised;
+    protected int platformAngle;
 
     /**
-     * Constructor for creating an object of a Scania type vehicle with a ramp
+     * Assembles the Scania class and makes sure the variables are set correctly
      */
     public Scania() {
-        assembler(2, 200, Color.black, "Scania");
-        ramp = new CargoRamp(5, 70); // Delegation of Cargo ramp
+        commonAssembler(2, 200, Color.black, "Scania", 19000);
+        transportAssembler(40000, 10);
+        platformRaised = false;
+        platformAngle = 0;
     }
-
-    @Override
-    public double speedFactor() {
-        if (!isStationary() && !ramp.platformRaised) {
-            return engine.enginePower * 0.01;
-        } else {
-            return 0; // Vehicle can't move while platform is raised
-        }
+    public int getPlatformAngle() {
+        return platformAngle;
     }
-
-    public boolean isStationary() {
-        return currentSpeed == 0; // checks if currentSpeed is 0
+    public void toggleStationary() {
+        isStationary = currentSpeed == 0; // checks if currentSpeed is 0
     }
-
     public void togglePlatform() throws Exception {
-        if (isStationary()) {
-            ramp.platformRaised = !ramp.platformRaised;
+        if (isStationary) {
+            platformRaised = !platformRaised;
         } else {
             throw new Exception("Vehicle need to be stationary to use the platform");
         }
     }
-
+    public void raisePlatform() throws Exception {
+        if (platformRaised && platformAngle < 70) {
+            platformAngle += 5;
+        } else if (platformAngle >= 70) {
+            throw new Exception("Platform cannot be raised above 70 degrees");
+        } else {
+            throw new Exception("Platform needs to be raised before use");
+        }
+    }
+    public void lowerPlatform() throws Exception {
+        if (platformRaised && platformAngle > 0) {
+            platformAngle -= 5;
+        } else if (platformAngle <= 0) {
+            throw new Exception("Platform cannot be lowered below 0 degrees");
+        } else {
+            throw new Exception("Platform needs to be raised before use");
+        }
+    }
 }

@@ -1,36 +1,32 @@
 import java.awt.*;
 import java.security.InvalidParameterException;
 
-/**
- * Abstract class with common methods and attributes for implementation of a Car-like object
- */
-
-abstract class Car implements Movable {
+abstract class MotorVehicle implements Movable {
     protected int nrDoors; // Number of doors on the car
+    protected int weight;
+    protected double enginePower; // Engine power of the car
     protected double currentSpeed; // The current speed of the car
     protected Color color; // Color of the car
     protected String modelName; // The car model name
     protected double x;
     protected double y;
     protected int dir; // The Car's direction in Degrees, subject to tweaks
-    protected Engine engine;
+    protected boolean engineOn;
 
-    /**
-     * Constructor for the rudimentary parts of a car- like object
-     * @param nrDoors The vehicle's number of doors
-     * @param enginePower The vehicles' engine power
-     * @param color the vehicles' color
-     * @param modelName the vehicles' model name
-     */
-    protected void assembler(int nrDoors, int enginePower, Color color, String modelName) {
+    protected void commonAssembler(int nrDoors, int enginePower, Color color, String modelName, int weight) {
         this.nrDoors = nrDoors;
+        this.enginePower = enginePower;
         this.color = color;
         this.modelName = modelName;
-        this.engine = new Engine(enginePower);
+        this.weight = weight;
+        engineOn = false;
     }
 
     public int getNrDoors(){
         return nrDoors;
+    }
+    public double getEnginePower(){
+        return enginePower;
     }
     public double getCurrentSpeed(){
         return currentSpeed;
@@ -41,19 +37,20 @@ abstract class Car implements Movable {
     protected void setColor(Color clr) {color = clr;}
 
     protected void toggleEngine(){
-        engine.engineToggle();
-        if (engine.engineOn){
+        if (!engineOn){
+            engineOn = true;
             currentSpeed = 0.1;
         } else {
+            engineOn = false;
             currentSpeed = 0;
         }
     }
 
-    abstract public double speedFactor(); // Instantiated objects have to implement as they differ
+    abstract double speedFactor(); // Instantiated objects have to implement as they differ
 
     private void incrementSpeed(double amount){
-        if (engine.engineOn){
-            currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, engine.enginePower);
+        if (engineOn){
+            currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
         }
         else{
             currentSpeed = 0;
