@@ -31,5 +31,4 @@ public class CarCarrierTest {
         CarCarrier carrier = new CarCarrier(4);
         assertEquals(8000, carrier.maxWeight);
     }
-
 }

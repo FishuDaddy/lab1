@@ -38,24 +38,28 @@ public class CarCarrier extends CarTransport {
     private boolean notTooHeavy(MotorVehicle vehicle) {
         return currentWeight + vehicle.weight <= maxWeight;
     }
+
     private void unloadBehind(MotorVehicle unloadedCar) { // Makes it so that the car is unloaded behind the carrier regardless of direction
         final int unloadOffset = 20; // subject to tweaks
         unloadedCar.x -= unloadOffset * Math.cos(Math.toRadians(this.dir));
         unloadedCar.y += unloadOffset * Math.sin(Math.toRadians(this.dir));
     }
-    public void loadVehicle(MotorVehicle vehicle) {
+    public void loadVehicle(MotorVehicle vehicle) throws Exception{
         if (carrierRamp.rampDown && carrierRamp.notFull() && notTooHeavy(vehicle) && notItself(vehicle) && inRange(vehicle)) {
             carrierRamp.onTransport.push(vehicle);
             currentWeight += vehicle.getWeight();
+        } else {
+            throw new Exception("Couldn't load vehicle, i can't tell you what went wrong");
         }
     }
-    public void unloadVehicle() {
-        if (carrierRamp.rampDown) {
+    public void unloadVehicle() throws Exception {
+        if (carrierRamp.rampDown && carrierRamp.onTransport.size() > 0) {
             MotorVehicle unloadedCar = carrierRamp.onTransport.peek();
             currentWeight -= unloadedCar.getWeight();
             unloadBehind(unloadedCar);
             carrierRamp.onTransport.pop();
-
+        } else {
+            throw new Exception("Something went wrong");
         }
     }
     @Override
