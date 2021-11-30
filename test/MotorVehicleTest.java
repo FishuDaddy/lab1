@@ -4,7 +4,7 @@ import java.security.InvalidParameterException;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class CarTest {
+public class MotorVehicleTest {
 
     public Volvo240 volvo = new Volvo240();
 
