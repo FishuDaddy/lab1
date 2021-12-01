@@ -3,12 +3,12 @@ abstract class MediumSizedCar extends MotorVehicle implements Transportable {
         return weight;
     }
 
-    public void load(CarTransport transport) {
+    public void load(TransportVehicle transport) {
         if (transport.canBeLoaded(this)) {
             transport.load(this);
         }
     }
-    public void unload(CarTransport transport) {
+    public void unload(TransportVehicle transport) {
 
     }
 }

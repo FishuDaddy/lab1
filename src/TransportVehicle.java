@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class CarTransport extends MotorVehicle {
+abstract class TransportVehicle extends MotorVehicle {
     protected int transportedWeight;
     protected int maxWeight;
     protected int capacity;
@@ -42,16 +42,24 @@ abstract class CarTransport extends MotorVehicle {
     }
 
     public boolean canBeLoaded(Transportable target) {
-        if (isWithinThreshold(target)) {
-            if (isNotFull()) {
-                return isNotTooHeavy(target.getWeight());
-            } else {
-                return false;
-            }
+        if (modelSpecificConditionsMet(target)) {
+            return genericConditionsMet(target);
         } else {
             return false;
         }
     }
+
+    private boolean genericConditionsMet(Transportable target) {
+        if (isStationary) {
+            if (isWithinThreshold(target)) {
+                if (isNotFull()) {
+                    return isNotTooHeavy(target.getWeight());
+                } else return false;
+            } else return false;
+        } else return false;
+    }
+
+    abstract boolean modelSpecificConditionsMet(Transportable target);
 
     /**
      * Checks if the target is within 10 coordinates x and y.
@@ -59,8 +67,8 @@ abstract class CarTransport extends MotorVehicle {
      * @return true if the condition is met, false if not.
      */
     private boolean isWithinThreshold(Transportable target) {
-        if (target.getX() <= this.getX() + this.loadThreshold  || target.getX() >= this.getX() + this.loadThreshold) {
-            return target.getY() <= this.getX() + this.loadThreshold || target.getY() >= this.getY() + this.loadThreshold;
+        if (target.getX() <= this.getX() + this.loadThreshold  || target.getX() >= this.getX() - this.loadThreshold) {
+            return target.getY() <= this.getX() + this.loadThreshold || target.getY() >= this.getY() - this.loadThreshold;
         } else {
             return false;
         }

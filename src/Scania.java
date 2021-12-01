@@ -1,7 +1,6 @@
 import java.awt.*;
-import java.util.ArrayList;
 
-public class Scania extends CarTransport {
+public class Scania extends TransportVehicle {
 
     protected boolean platformRaised;
     protected int platformAngle;
@@ -45,5 +44,12 @@ public class Scania extends CarTransport {
         } else {
             throw new Exception("Platform needs to be raised before use");
         }
+    }
+
+    @Override
+    boolean modelSpecificConditionsMet(Transportable target) {
+        if (!platformRaised) {
+            return !(target instanceof MotorVehicle);
+        } else return false;
     }
 }
