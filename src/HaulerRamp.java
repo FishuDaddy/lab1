@@ -51,4 +51,8 @@ public class HaulerRamp extends Ramp{
         return onTransport.size() < carLimit;
     }
 
+    public int getSize() {
+        return onTransport.size();
+    }
+
 }

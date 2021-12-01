@@ -44,16 +44,49 @@ public class CarCarrier extends CarTransport {
         unloadedCar.x -= unloadOffset * Math.cos(Math.toRadians(this.dir));
         unloadedCar.y += unloadOffset * Math.sin(Math.toRadians(this.dir));
     }
-    public void loadVehicle(MotorVehicle vehicle) throws Exception{
-        if (carrierRamp.rampDown && carrierRamp.notFull() && notTooHeavy(vehicle) && notItself(vehicle) && inRange(vehicle)) {
-            carrierRamp.onTransport.push(vehicle);
-            currentWeight += vehicle.getWeight();
+    private boolean loadConditionsMet(MotorVehicle vehicle) throws Exception {
+        if (carrierRamp.rampDown) {
+            if (inRange(vehicle)) {
+                if (notItself(vehicle)) {
+                    if (notTooHeavy(vehicle)) {
+                        if (carrierRamp.notFull()) {
+                            return true;
+                        } else {
+                            throw new Exception("Ramp is full");
+                        }
+                    } else {
+                        throw new Exception("Vehicle's weight exceeds the allowed amount");
+                    }
+                } else {
+                    throw new Exception("Can't load itself");
+                }
+            } else {
+                throw new Exception("Vehicle not in range");
+            }
         } else {
-            throw new Exception("Couldn't load vehicle, i can't tell you what went wrong");
+            throw new Exception("Ramp isn't lowered");
         }
     }
+    private boolean unloadConditionsMet() throws Exception {
+        if (carrierRamp.rampDown) {
+            if (carrierRamp.getSize() < 0) {
+                return true;
+            } else {
+                throw new Exception("No vehicles on the transport");
+            }
+        } else {
+            throw new Exception("Ramp isn't lowered");
+        }
+    }
+    public void loadVehicle(MotorVehicle vehicle) throws Exception{
+        if (loadConditionsMet(vehicle)) {
+            carrierRamp.onTransport.push(vehicle);
+            currentWeight += vehicle.getWeight();
+        }
+    }
+
     public void unloadVehicle() throws Exception {
-        if (carrierRamp.rampDown && carrierRamp.onTransport.size() > 0) {
+        if (unloadConditionsMet()) {
             MotorVehicle unloadedCar = carrierRamp.onTransport.peek();
             currentWeight -= unloadedCar.getWeight();
             unloadBehind(unloadedCar);
@@ -62,6 +95,7 @@ public class CarCarrier extends CarTransport {
             throw new Exception("Something went wrong");
         }
     }
+
     @Override
     public void move(){
         this.x += getCurrentSpeed() * Math.cos(Math.toRadians(this.dir));
