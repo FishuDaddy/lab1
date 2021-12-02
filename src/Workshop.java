@@ -4,30 +4,47 @@ import com.sun.source.tree.ModifiersTree;
 import java.util.ArrayList;
 
 public class Workshop {
-    protected ArrayList<Object> storage;
+    protected ArrayList<MotorVehicle> storage;
     protected int storageLimit;
-    protected Object carType;
+    protected String carType;
     protected boolean anyVehicle;
 
-    public Workshop(int storageLimit, boolean anyVehicle, Object carType) {
+    public Workshop(int storageLimit, String carType) {
         this.storageLimit = storageLimit;
-        this.anyVehicle = anyVehicle;
-        if (!anyVehicle) {
-            this.carType = carType;
+        this.storage = new ArrayList<>(storageLimit);
+        if (carType == null) {
+            this.anyVehicle = true;
         } else {
-            this.carType = null;
+            this.carType = "class " + carType;
+            this.anyVehicle = false;
+        }
+
+    }
+    public String getStorage() {
+        return "Current vehicles in storage > " + storage;
+    }
+    public void loadVehicle(MotorVehicle vehicle) throws Exception {
+        if (storage.size() < storageLimit) {
+            if (!anyVehicle) {
+                if (vehicle.getClass().toString().equals(carType)) {
+                    storage.add(vehicle);
+                } else {
+                    throw new Exception("Invalid car model");
+                }
+            } else {
+                storage.add(vehicle);
+            }
+        } else {
+            throw new Exception("Not enough storage");
         }
     }
 
-    public void loadVehicle(MotorVehicle vehicle) {
-        if (anyVehicle && storage.size() < storageLimit) {
-            storage.add(vehicle);
-        } else if (!anyVehicle) {}
-
-    }
-
-    public void unloadVehicle(MotorVehicle vehicle) {
-        storage.remove(vehicle);
+    public void unloadVehicle(MotorVehicle vehicle) throws Exception {
+        if (storage.size() > 0) {
+            storage.remove(vehicle);
+        } else {
+            throw new Exception("Nothing in storage");
+        }
     }
 
 
