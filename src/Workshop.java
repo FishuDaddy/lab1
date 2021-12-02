@@ -1,4 +1,4 @@
-public class Workshop<T> implements CoordinateDependent {
+public class Workshop<T extends Transportable> implements CoordinateDependent {
     private double x;
     private double y;
     private Loadable loadable;
@@ -18,13 +18,11 @@ public class Workshop<T> implements CoordinateDependent {
         this.y = y;
         loadable = new Loadable(capacity, threshold, maxWeight, false);
     }
-    public void load(Transportable target) throws Exception {
-        if (type == target.getClass()) {
-            if (loadable.loadableConditionsMet(this, target)) {
-                loadable.calculateLoad(target);
-            }
-        } else {
-            throw new Exception("Invalid car model");
+    public void load(T target) throws Exception {
+        System.out.println(target.getClass());
+        System.out.println(type);
+        if (loadable.loadableConditionsMet(this, target)) {
+            loadable.calculateLoad(target);
         }
     }
     public void unload(Transportable target) throws Exception {
