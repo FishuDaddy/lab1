@@ -1,4 +1,4 @@
-public interface Transportable extends CoordinateDependent {
+public interface Transportable extends DirectionAndCoordinateDependent {
     int getWeight();
     boolean isBeingTransported();
     boolean canBeLoaded();
