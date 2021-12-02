@@ -3,7 +3,7 @@ import java.awt.*;
 /**
  * Class representing a Truck with ramp able to haul vehicles
  */
-public class CarCarrier extends CarTransport {
+public class CarCarrier extends CarTransport{
 
     protected HaulerRamp carrierRamp;
 
@@ -30,7 +30,7 @@ public class CarCarrier extends CarTransport {
         }
     }
     private boolean inRange(MotorVehicle vehicle) {
-        return (Math.hypot(vehicle.x-this.x, vehicle.y-this.y) < 20);
+        return (Math.hypot(vehicle.x-this.x, vehicle.y-this.y) < 10);
     }
     private boolean notItself(MotorVehicle vehicle) {
         return vehicle != this;
@@ -78,12 +78,15 @@ public class CarCarrier extends CarTransport {
             throw new Exception("Ramp isn't lowered");
         }
     }
+
+
     public void loadVehicle(MotorVehicle vehicle) throws Exception{
         if (loadConditionsMet(vehicle)) {
             carrierRamp.onTransport.push(vehicle);
             currentWeight += vehicle.getWeight();
         }
     }
+
 
     public void unloadVehicle() throws Exception {
         if (unloadConditionsMet()) {
