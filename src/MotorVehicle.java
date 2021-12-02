@@ -12,6 +12,7 @@ abstract class MotorVehicle implements Movable {
     protected double y;
     protected double dir; // The Car's direction in Degrees, subject to tweaks
     protected boolean engineOn;
+    protected boolean allowedToMove;
 
     protected void commonAssembler(int nrDoors, int enginePower, Color color, String modelName, int weight) {
         this.nrDoors = nrDoors;
@@ -47,7 +48,7 @@ abstract class MotorVehicle implements Movable {
     public void setY(double y) {
         this.y = y;
     }
-    public void setCoordinates(int x, int y) {
+    public void setCoordinates(double x, double y) {
         setX(x);
         setY(y);
     }
@@ -56,6 +57,10 @@ abstract class MotorVehicle implements Movable {
     }
     public double getDirection(){
         return dir;
+    }
+
+    public boolean isStationary() {
+        return currentSpeed == 0;
     }
 
     protected void toggleEngine(){
@@ -82,10 +87,12 @@ abstract class MotorVehicle implements Movable {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
     }
     public void gas(double amount) throws InvalidParameterException{
-        if (amount <= 1 && amount >= 0){
-            incrementSpeed(amount);
-        } else {
-            throw new InvalidParameterException("Please input an amount in the interval [0,1]");
+        if (allowedToMove) {
+            if (amount <= 1 && amount >= 0) {
+                incrementSpeed(amount);
+            } else {
+                throw new InvalidParameterException("Please input an amount in the interval [0,1]");
+            }
         }
     }
     public void brake(double amount) throws InvalidParameterException {

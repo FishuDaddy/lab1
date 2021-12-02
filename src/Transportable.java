@@ -1,6 +1,6 @@
 public interface Transportable extends CoordinateDependent {
     int getWeight();
-    void load(TransportVehicle transport);
-    void unload(TransportVehicle transport);
-
+    boolean isBeingTransported();
+    boolean canBeLoaded();
+    void setBeingTransportState(boolean state);
 }

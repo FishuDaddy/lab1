@@ -1,6 +1,6 @@
 import java.awt.*;
 
-class Volvo240 extends MediumSizedCar {
+class Volvo240 extends TransportableCar {
 
     private final static double trimFactor = 1.25;
     

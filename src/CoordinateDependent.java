@@ -1,5 +1,5 @@
 public interface CoordinateDependent {
-    void setCoordinates(int x, int y);
+    void setCoordinates(double x, double y);
     double getX();
     double getY();
     void setDirection(double direction);

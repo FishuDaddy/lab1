@@ -2,27 +2,30 @@ import java.awt.*;
 
 public class Scania extends TransportVehicle {
 
-    protected boolean platformRaised;
-    protected int platformAngle;
+    private boolean platformRaised;
+    private int platformAngle;
 
     /**
      * Assembles the Scania class and makes sure the variables are set correctly
      */
     public Scania() {
         commonAssembler(2, 200, Color.black, "Scania", 19000);
-        transportAssembler(40000, 10, 10);
+        transportAssembler(40000, 10, 10, true);
+        modelSpecificConstructor();
+    }
+
+    private void modelSpecificConstructor() {
         platformRaised = false;
         platformAngle = 0;
     }
+
     public int getPlatformAngle() {
         return platformAngle;
     }
-    public void toggleStationary() {
-        isStationary = currentSpeed == 0; // checks if currentSpeed is 0
-    }
     public void togglePlatform() throws Exception {
-        if (isStationary) {
+        if (isStationary()) {
             platformRaised = !platformRaised;
+            allowedToMove = !platformRaised;
         } else {
             throw new Exception("Vehicle need to be stationary to use the platform");
         }
@@ -47,7 +50,7 @@ public class Scania extends TransportVehicle {
     }
 
     @Override
-    boolean modelSpecificConditionsMet(Transportable target) {
+    protected boolean modelSpecificConditionsMet(Transportable target) {
         if (!platformRaised) {
             return !(target instanceof MotorVehicle);
         } else return false;
