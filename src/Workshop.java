@@ -1,9 +1,8 @@
-import java.lang.reflect.Type;
-
-public class Workshop implements CoordinateDependent {
-    double x;
-    double y;
-    Loadable loadable;
+public class Workshop<T> implements CoordinateDependent {
+    private double x;
+    private double y;
+    private Loadable loadable;
+    private T type;
     public double getX() {
         return x;
     }
@@ -19,5 +18,16 @@ public class Workshop implements CoordinateDependent {
         this.y = y;
         loadable = new Loadable(capacity, threshold, maxWeight, false);
     }
-    public void load(Type<t> transportable)
+    public void load(Transportable target) throws Exception {
+        if (type == target.getClass()) {
+            if (loadable.loadableConditionsMet(this, target)) {
+                loadable.calculateLoad(target);
+            }
+        } else {
+            throw new Exception("Invalid car model");
+        }
+    }
+    public void unload(Transportable target) throws Exception {
+        loadable.unload(target);
+    }
 }
