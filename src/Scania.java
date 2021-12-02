@@ -14,7 +14,7 @@ public class Scania extends CarTransport {
     public Scania() {
         commonAssembler(2, 200, Color.black, "Scania", 3000);
         transportAssembler(500);
-        cargoRamp = new CargoRamp(5, 70); // Delegation of Cargo ramp
+        cargoRamp = new CargoRamp(); // Delegation of Cargo ramp
     }
 
     @Override

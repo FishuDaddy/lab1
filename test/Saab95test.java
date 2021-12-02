@@ -38,6 +38,11 @@ public class Saab95test {
     public void saab_enginePower() {
         assertEquals(125, saab.engine.enginePower, 0.01);
     }
+    @Test
+    public void saab_weight() {
+        assertEquals(2000, saab.getWeight());
+    }
+
 
     @Test
     public void speedFactor_should_be_constant(){

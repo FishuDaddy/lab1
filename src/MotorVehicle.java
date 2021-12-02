@@ -10,8 +10,8 @@ abstract class MotorVehicle implements Movable {
     protected double currentSpeed; // The current speed of the car
     protected Color color; // Color of the car
     protected String modelName; // The car model name
-    protected double x;
-    protected double y;
+    protected int x;
+    protected int y;
     protected int dir; // The Car's direction in Degrees, subject to tweaks
     protected Engine engine;
     protected int weight; // Weight in kg
@@ -31,6 +31,7 @@ abstract class MotorVehicle implements Movable {
         this.engine = new Engine(enginePower);
         this.weight = weight;
         this.isStationary = true;
+        this.dir = 0;
     }
 
     public int getNrDoors(){
@@ -63,8 +64,7 @@ abstract class MotorVehicle implements Movable {
     private void incrementSpeed(double amount){
         if (engine.engineOn){
             currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, engine.enginePower);
-        }
-        else{
+        } else {
             currentSpeed = 0;
         }
     }
@@ -84,6 +84,19 @@ abstract class MotorVehicle implements Movable {
         } else {
             throw new InvalidParameterException("Please input an amount in the interval [0,1]");
         }
+    }
+    protected void setX(int x) {
+        this.x = x;
+    }
+    protected void setY(int y) {
+        this.y = y;
+    }
+    protected void setDir(int dir) {
+        this.dir = dir;
+    }
+    protected void setPos(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     @Override

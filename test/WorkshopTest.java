@@ -6,44 +6,58 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class WorkshopTest {
 
-    Saab95 saab = new Saab95();
-    Volvo240 volvo = new Volvo240();
 
     @Test
-    public void StorageShouldBe8(){
-        Workshop workshop = new Workshop(8, null);
+    public void checkLimit(){
+        Workshop<MotorVehicle> workshop = new Workshop<>(8);
         assertEquals(8, workshop.storageLimit);
     }
     @Test
-    public void checkCarTypeSaab(){
-        Workshop workshop = new Workshop(8, "Saab95");
-        assertEquals("class Saab95", workshop.carType);
+    public void checkStorageSize(){
+        Workshop<MotorVehicle> workshop = new Workshop<>(8);
+        assertEquals(0, workshop.getStorageSize());
     }
     @Test
-    public void checkCarTypeVolvo(){
-        Workshop workshop = new Workshop(8, "Volvo240");
-        assertEquals("class Volvo240", workshop.carType);
-    }
-    @Test
-    public void checkCarTypeScania(){
-        Workshop workshop = new Workshop(8, "Scania");
-        assertEquals("class Scania", workshop.carType);
-    }
-    @Test
-    public void checkCarTypeCarCarrier(){
-        Workshop workshop = new Workshop(8, "CarCarrier");
-        assertEquals("class CarCarrier", workshop.carType);
-    }
-    @Test
-    public void CheckStorageSize(){
-        Workshop workshop = new Workshop(8, null);
-        assertEquals(0, workshop.storage.size());
-    }
-    @Test
-    public void CheckStorageSizeShouldBeOne() throws Exception {
-        Workshop workshop = new Workshop(8, null);
+    public void CheckSizeAfterLoad() throws Exception{
+        Workshop<MotorVehicle> workshop = new Workshop<>(8);
+        Saab95 saab = new Saab95();
+        Volvo240 volvo = new Volvo240();
+
         workshop.loadVehicle(saab);
-        assertEquals(1, workshop.storage.size());
+        workshop.loadVehicle(volvo);
+        assertEquals(2, workshop.getStorageSize());
     }
+    @Test
+    public void ThrowExceptionLoad() {
+        Exception thrown =  assertThrows(Exception.class, () -> {
+            Workshop<MotorVehicle> workshop = new Workshop<>(1);
+            Saab95 saab = new Saab95();
+            Volvo240 volvo = new Volvo240();
+
+            workshop.loadVehicle(saab);
+            workshop.loadVehicle(volvo);
+        });
+    }
+    @Test
+    public void ThrowExceptionUnload() {
+        Exception thrown =  assertThrows(Exception.class, () -> {
+            Workshop<MotorVehicle> workshop = new Workshop<>(1);
+            Saab95 saab = new Saab95();
+
+            workshop.unloadVehicle(saab);
+        });
+    }
+    @Test
+    public void CheckSizeAfterUnload() throws Exception{
+        Workshop<MotorVehicle> workshop = new Workshop<>(8);
+        Saab95 saab = new Saab95();
+        Volvo240 volvo = new Volvo240();
+
+        workshop.loadVehicle(saab);
+        workshop.loadVehicle(volvo);
+        workshop.unloadVehicle(volvo);
+        assertEquals(1, workshop.getStorageSize());
+    }
+
 
 }

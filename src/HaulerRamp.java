@@ -4,7 +4,7 @@ import java.util.Stack;
  * Represents a ramp which can be loaded with cars for transport
  */
 
-public class HaulerRamp extends Ramp{
+public class HaulerRamp extends Ramp {
 
     protected boolean rampDown;
     protected int carLimit;
@@ -21,38 +21,38 @@ public class HaulerRamp extends Ramp{
         rampDown = false; // Ramp starts off as up
     }
 
-    public String getCurrentLoad() {
-        return "Current load >" + onTransport;
+    public int getHaulSize() {
+        return onTransport.size();
     }
-
 
     @Override
     public void raiseRamp() throws Exception {
-        if (platformUse && rampDown) {
-            rampDown = false;
-        } else if (platformUse) {
-            throw new Exception("Platform is already raised");
+        if (platformUse) {
+            if (rampDown) {
+                rampDown = false;
+            } else {
+                throw new Exception("Platform is already raised");
+            }
+        } else {
+            throw new Exception("Platform need to be in use before operation");
+        }
+    }
+    @Override
+    public void lowerRamp() throws Exception {
+        if (platformUse) {
+            if (!rampDown) {
+                rampDown = true;
+            } else {
+                throw new Exception("Platform is already lowered");
+            }
         } else {
             throw new Exception("Platform need to be in use before operation");
         }
     }
 
-    @Override
-    public void lowerRamp() throws Exception {
-        if (platformUse && !rampDown) {
-            rampDown = true;
-        } else if (platformUse) {
-            throw new Exception("Platform is already lowered");
-        } else {
-            throw new Exception("Platform need to be in use before operation");
-        }
-    }
     public boolean notFull() {
         return onTransport.size() < carLimit;
     }
 
-    public int getSize() {
-        return onTransport.size();
-    }
 
 }

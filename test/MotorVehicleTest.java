@@ -96,6 +96,14 @@ public class MotorVehicleTest {
             volvo.brake(10);
         });
     }
+    @Test
+    public void turnLeft() {
+        Volvo240 volvo = new Volvo240();
+        volvo.toggleEngine();
+        volvo.setDir(45);
+        volvo.turnLeft();
+        assertEquals(90, volvo.dir);
+    }
 
 
 }

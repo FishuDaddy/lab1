@@ -8,39 +8,46 @@ public class CargoRamp extends Ramp {
     protected int platformAngle;
 
     /**
-     * Creates a cargo ramp with parameters for angleChange and the ramps angleLimit
-     * @param angleChange The change in the ramps angle per operation of lowering or raising
-     * @param angleLimit The limit of which the ramp can be raised
+     * Creates a cargo ramp
+     *
      */
-    public CargoRamp(int angleChange, int angleLimit) {
+    public CargoRamp() {
         ramp();
-        this.angleChange = angleChange;
-        this.angleLimit = angleLimit;
+        this.angleChange = 5;
+        this.angleLimit = 70;
         this.platformAngle = 0;
     }
 
     public int getPlatformAngle() {
         return platformAngle;
     }
+    protected void setPlatformAngle(int newAngle) {
+        platformAngle = newAngle;
+    }
 
     @Override
     public void raiseRamp() throws Exception {
-        if (platformUse && platformAngle < angleLimit) {
-            platformAngle += angleChange;
-        } else if (platformAngle >= angleLimit) {
-            throw new Exception("Platform cannot be raised above 70 degrees");
+        if (platformUse) {
+            if (getPlatformAngle() < angleLimit) {
+                platformAngle += angleChange;
+            } else {
+                throw new Exception("Platform cannot be raised above 70 degrees");
+            }
         } else {
-            throw new Exception("Platform needs to be raised before use");
+            throw new Exception("Platform needs to be activated before use");
         }
     }
+
     @Override
     public void lowerRamp() throws Exception {
-        if (platformUse && platformAngle > 0) {
-            platformAngle -= angleChange;
-        } else if (platformAngle <= 0) {
-            throw new Exception("Platform cannot be lowered below 0 degrees");
+        if (platformUse) {
+            if (getPlatformAngle() > 0) {
+                platformAngle -= angleChange;
+            } else {
+                throw new Exception("Platform cannot be lowered below 0 degrees");
+            }
         } else {
-            throw new Exception("Platform needs to be raised before use");
+            throw new Exception("Platform needs to be activated before use");
         }
     }
 

@@ -22,21 +22,21 @@ public class CarCarrier extends CarTransport{
         return engine.enginePower * 0.01;
     }
 
-    public void togglePlatform() throws Exception {
+    public void toggleRamp() throws Exception {
         if (isStationary()) {
             carrierRamp.switchState();
         } else {
             throw new Exception("Vehicle need to be stationary to use the platform");
         }
     }
-    private boolean inRange(MotorVehicle vehicle) {
-        return (Math.hypot(vehicle.x-this.x, vehicle.y-this.y) < 10);
+    protected boolean inRange(MotorVehicle vehicle) {
+        return (Math.hypot(vehicle.x-this.x, vehicle.y-this.y) < 50);
     }
-    private boolean notItself(MotorVehicle vehicle) {
+    protected boolean notItself(MotorVehicle vehicle) {
         return vehicle != this;
     }
-    private boolean notTooHeavy(MotorVehicle vehicle) {
-        return currentWeight + vehicle.weight <= maxWeight;
+    protected boolean notTooHeavy(MotorVehicle vehicle) {
+        return (currentWeight + vehicle.weight) <= maxWeight;
     }
 
     private void unloadBehind(MotorVehicle unloadedCar) { // Makes it so that the car is unloaded behind the carrier regardless of direction
@@ -69,7 +69,7 @@ public class CarCarrier extends CarTransport{
     }
     private boolean unloadConditionsMet() throws Exception {
         if (carrierRamp.rampDown) {
-            if (carrierRamp.getSize() < 0) {
+            if (carrierRamp.getHaulSize() > 0) {
                 return true;
             } else {
                 throw new Exception("No vehicles on the transport");
@@ -94,8 +94,6 @@ public class CarCarrier extends CarTransport{
             currentWeight -= unloadedCar.getWeight();
             unloadBehind(unloadedCar);
             carrierRamp.onTransport.pop();
-        } else {
-            throw new Exception("Something went wrong");
         }
     }
 
@@ -104,9 +102,9 @@ public class CarCarrier extends CarTransport{
         this.x += getCurrentSpeed() * Math.cos(Math.toRadians(this.dir));
         this.y += getCurrentSpeed() * Math.sin(Math.toRadians(this.dir));
         for (MotorVehicle vehicle: carrierRamp.onTransport) {
-            vehicle.x = this.x;
-            vehicle.y = this.y;
-            vehicle.dir = this.dir;
+            vehicle.setX(this.x);
+            vehicle.setY(this.y);
+            vehicle.setDir(this.dir);
         }
     }
 }
