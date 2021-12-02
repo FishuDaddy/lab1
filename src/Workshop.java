@@ -18,13 +18,23 @@ public class Workshop<T extends Transportable> implements CoordinateDependent {
         this.y = y;
         loadable = new Loadable(capacity, threshold, maxWeight, false);
     }
+
+    /**
+     * Loads the target into the Workshop.
+     * @param target the Transportable to be loaded.
+     * @throws Exception if the target does not fulfill the conditions to be loaded.
+     */
     public void load(T target) throws Exception {
-        System.out.println(target.getClass());
-        System.out.println(type);
         if (loadable.loadableConditionsMet(this, target)) {
             loadable.calculateLoad(target);
         }
     }
+
+    /**
+     * Unloads the target from the Worshop.
+     * @param target the Transportable to be unloaded.
+     * @throws Exception if the target does not fulfill the conditions to be unloaded.
+     */
     public void unload(Transportable target) throws Exception {
         loadable.unload(target);
     }
