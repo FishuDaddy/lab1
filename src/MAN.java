@@ -14,7 +14,7 @@ public class MAN extends TransportVehicle {
 
     @Override
     protected boolean modelSpecificConditionsMet(Transportable target) {
-        return (target instanceof TransportableCar);
+        return (target instanceof TransportableCar && rampDown);
     }
     public void toggleRamp() {
         rampDown = isStationary();

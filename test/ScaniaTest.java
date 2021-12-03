@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.awt.*;
 import java.security.InvalidParameterException;
@@ -21,8 +22,18 @@ public class ScaniaTest {
         assertEquals(Color.black, scania.color);
     }
     @Test
-    public void ShouldBeStationary() {
+    public void shouldBeStationary() {
         Scania scania = new Scania();
         assertTrue(scania.isStationary());
+    }
+    @Test
+    public void angleTest() {
+        Scania scania = new Scania();
+        assertEquals(scania.getPlatformAngle(), 0);
+    }
+    @Test
+    public void toggleRaisedTest() throws Exception {
+        Scania scania = new Scania();
+        scania.togglePlatform();
     }
 }
