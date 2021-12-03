@@ -16,6 +16,7 @@ abstract class MotorVehicle implements Movable {
     protected Engine engine;
     protected int weight; // Weight in kg
     protected boolean isStationary;
+    protected boolean canMove;
 
     /**
      * Constructor for the rudimentary parts of a car- like object
@@ -32,18 +33,19 @@ abstract class MotorVehicle implements Movable {
         this.weight = weight;
         this.isStationary = true;
         this.dir = 0;
+        this.canMove = true;
     }
 
-    public int getNrDoors(){
+    protected  int getNrDoors(){
         return nrDoors;
     }
-    public double getCurrentSpeed(){
+    protected double getCurrentSpeed(){
         return currentSpeed;
     }
-    public Color getColor(){
+    protected Color getColor(){
         return color;
     }
-    protected void setColor(Color clr) {color = clr;}
+    public void setColor(Color clr) {color = clr;}
     protected boolean isStationary() {
         return currentSpeed == 0; // checks if currentSpeed is 0
     }
@@ -68,23 +70,37 @@ abstract class MotorVehicle implements Movable {
             currentSpeed = 0;
         }
     }
+
     private void decrementSpeed(double amount) {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
     }
+
+    /**
+     * Method that increases the vehicle's current speed
+     * @param amount a double from 0 to 1
+     * @throws InvalidParameterException throws a custom exception depending on the error
+     */
     public void gas(double amount) throws InvalidParameterException{
-        if (amount <= 1 && amount >= 0){
+        if (amount <= 1 && amount >= 0 && canMove){
             incrementSpeed(amount);
         } else {
             throw new InvalidParameterException("Please input an amount in the interval [0,1]");
         }
     }
+
+    /**
+     * Method that decreases the vehicle's current speed
+     * @param amount a double from 0 to 1
+     * @throws InvalidParameterException throws a custom exception depending on the error
+     */
     public void brake(double amount) throws InvalidParameterException {
-        if (amount <= 1 && amount >= 0) {
+        if (amount <= 1 && amount >= 0 && canMove) {
             decrementSpeed(amount);
         } else {
             throw new InvalidParameterException("Please input an amount in the interval [0,1]");
         }
     }
+
     protected void setX(int x) {
         this.x = x;
     }

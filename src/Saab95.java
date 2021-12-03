@@ -17,13 +17,12 @@ class Saab95 extends MediumCar {
         dir = 45;
     }
 
-    public void setTurboOn(){
-	    turboOn = true;
+    /**
+     * Toggles the saab's turbo between on and off
+     */
+    protected void toggleTurbo() {
+        turboOn = !turboOn;
     }
-    public void setTurboOff(){
-	    turboOn = false;
-    }
-    
     public double speedFactor(){
         double turbo = 1;
         if(turboOn) turbo = 1.3;

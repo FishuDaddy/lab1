@@ -25,6 +25,10 @@ public class HaulerRamp extends Ramp {
         return onTransport.size();
     }
 
+    /**
+     * Raises the ramp if the conditions are met, being if the platform is activated and if ramp is lowered
+     * @throws Exception throws a custom error depending on what returned false
+     */
     @Override
     public void raiseRamp() throws Exception {
         if (platformUse) {
@@ -37,6 +41,11 @@ public class HaulerRamp extends Ramp {
             throw new Exception("Platform need to be in use before operation");
         }
     }
+
+    /**
+     * Lowers the ramp if the conditions are met, being if the platform is activated and if ramp is raised
+     * @throws Exception throws a custom error depending on what returned false
+     */
     @Override
     public void lowerRamp() throws Exception {
         if (platformUse) {

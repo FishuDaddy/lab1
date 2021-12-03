@@ -1,6 +1,6 @@
 import org.testng.annotations.Test;
 import java.awt.*;
-import java.security.InvalidParameterException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class Saab95test {
@@ -14,14 +14,14 @@ public class Saab95test {
 
     @Test
     public void setTurboOnShouldTurnTurboOn() {
-        saab.setTurboOn();
+        saab.toggleTurbo();
         assertTrue(saab.turboOn);
     }
 
     @Test
     public void setTurboOffShouldTurnTurboOff() {
-        saab.setTurboOn();
-        saab.setTurboOff();
+        saab.toggleTurbo();
+        saab.toggleTurbo();
         assertFalse(saab.turboOn);
     }
 
@@ -47,14 +47,13 @@ public class Saab95test {
     @Test
     public void speedFactor_should_be_constant(){
         Saab95 saab = new Saab95();
-        saab.setTurboOff();
         assertEquals(1.25, saab.speedFactor(), 0.01);
     }
 
     @Test
     public void speedFactor_with_turbo(){
         Saab95 saab = new Saab95();
-        saab.setTurboOn();
+        saab.toggleTurbo();
         assertEquals(1.625, saab.speedFactor(), 0.01);
     }
 }

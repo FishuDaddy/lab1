@@ -39,18 +39,33 @@ public class CarCarrier extends CarTransport{
         return (currentWeight + vehicle.weight) <= maxWeight;
     }
 
+    /**
+     * Method for setting an unloaded's car position always being behind the carrier
+     * @param unloadedCar The vehicle being unloaded
+     */
     private void unloadBehind(MotorVehicle unloadedCar) { // Makes it so that the car is unloaded behind the carrier regardless of direction
         final int unloadOffset = 20; // subject to tweaks
         unloadedCar.x -= unloadOffset * Math.cos(Math.toRadians(this.dir));
         unloadedCar.y += unloadOffset * Math.sin(Math.toRadians(this.dir));
     }
+
+    /**
+     * Method for checking the conditions before a car is loaded onto a Hauler.
+     * @param vehicle The vehicle being loaded
+     * @return Returns true if all the conditions are met
+     * @throws Exception Throws a custom exception depending on what returned false
+     */
     private boolean loadConditionsMet(MotorVehicle vehicle) throws Exception {
         if (carrierRamp.rampDown) {
             if (inRange(vehicle)) {
                 if (notItself(vehicle)) {
                     if (notTooHeavy(vehicle)) {
                         if (carrierRamp.notFull()) {
-                            return true;
+                            if (vehicle.canMove) {
+                                return true;
+                            } else {
+                                throw new Exception("Vehicle is currently loaded");
+                            }
                         } else {
                             throw new Exception("Ramp is full");
                         }
@@ -67,6 +82,12 @@ public class CarCarrier extends CarTransport{
             throw new Exception("Ramp isn't lowered");
         }
     }
+
+    /**
+     * A method that returns true if all of the conditions are met. This includes if the ramp is currently lowered, and if there is a vehicle on the ramp
+     * @return Returns true if all the conditions are met
+     * @throws Exception Throws a custom exception depending on what returned false
+     */
     private boolean unloadConditionsMet() throws Exception {
         if (carrierRamp.rampDown) {
             if (carrierRamp.getHaulSize() > 0) {
@@ -79,24 +100,39 @@ public class CarCarrier extends CarTransport{
         }
     }
 
-
+    /**
+     * A method for loading a vehicle onto the given ramp. First it checks if all the conditions are met for loading
+     * then it pushed the vehicle onto a stack that simulates ramp storage structure, then it adds the vehicle's weight onto the total weight. When the vehicle
+     * is in a loaded state it cannot move
+     * @param vehicle The given vehicle being loaded
+     * @throws Exception See "loadConditionsMet"
+     */
     public void loadVehicle(MotorVehicle vehicle) throws Exception{
         if (loadConditionsMet(vehicle)) {
             carrierRamp.onTransport.push(vehicle);
             currentWeight += vehicle.getWeight();
+            vehicle.canMove = false;
         }
     }
 
-
+    /**
+     * A method for unloading the vehicle. If the conditions are met for unloading (see "unloadConditionsMet") then it peeks onto the top of the stack,
+     * it then stores that vehicle in a variable that is used to subtract it's weight and set it's "canMove" attribute to true. The vehicle is then popped of the stack
+     * @throws Exception See "unloadConditionsMet"
+     */
     public void unloadVehicle() throws Exception {
         if (unloadConditionsMet()) {
             MotorVehicle unloadedCar = carrierRamp.onTransport.peek();
             currentWeight -= unloadedCar.getWeight();
             unloadBehind(unloadedCar);
             carrierRamp.onTransport.pop();
+            unloadedCar.canMove = true;
         }
     }
 
+    /**
+     * Overrides the move function to include the fact that every vehicle's position currently loaded has the same position as the carrier
+     */
     @Override
     public void move(){
         this.x += getCurrentSpeed() * Math.cos(Math.toRadians(this.dir));
