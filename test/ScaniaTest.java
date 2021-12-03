@@ -35,5 +35,26 @@ public class ScaniaTest {
     public void toggleRaisedTest() throws Exception {
         Scania scania = new Scania();
         scania.togglePlatform();
+        assertTrue(scania.isPlatformRaised());
+    }
+    @Test
+    public void raisedAngleTest() throws Exception {
+        Scania scania = new Scania();
+        scania.togglePlatform();
+        scania.raisePlatform();
+        assertEquals(scania.getPlatformAngle(), 5);
+    }
+    @Test void loweredAngleTest() throws Exception {
+        Scania scania = new Scania();
+        scania.togglePlatform();
+        scania.raisePlatform();
+        scania.raisePlatform();
+        scania.lowerPlatform();
+        assertEquals(scania.getPlatformAngle(), 5);
+    }
+    @Test void conditionsTest() throws Exception {
+        Scania scania = new Scania();
+        Container container = new Container(0, 0, 1000, 0);
+        scania.load(container);
     }
 }

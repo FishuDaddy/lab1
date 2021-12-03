@@ -11,6 +11,9 @@ abstract class TransportVehicle extends MotorVehicle {
         this.allowedToMove = allowedToMove;
     }
 
+    /**
+     * Moves the Transporter as well as all the Transportables on-board.
+     */
     @Override
     public void move(){
         this.x += getCurrentSpeed() * Math.cos(Math.toRadians(this.dir));
@@ -20,6 +23,9 @@ abstract class TransportVehicle extends MotorVehicle {
         }
     }
 
+    /**
+     * Turns the Transporter left as well as all the Transportables on-board.
+     */
     @Override
     public void turnLeft(){
         this.dir += 45;
@@ -28,6 +34,9 @@ abstract class TransportVehicle extends MotorVehicle {
             transported.setDirection(this.getDirection());
         }
     }
+    /**
+     * Turns the Transporter right as well as all the Transportables on-board.
+     */
     @Override
     public void turnRight() {
         this.dir -= 45;
@@ -37,6 +46,12 @@ abstract class TransportVehicle extends MotorVehicle {
         }
     }
 
+    /**
+     * Checks if the generic conditions for an object to be loaded on to the TransportVehicle are fulfilled
+     * @param target the target to be loaded, is compared to the conditions.
+     * @return true if conditions are met.
+     * @throws Exception if conditions are not met.
+     */
     private boolean genericConditionsMet(Transportable target) throws Exception {
         if (loadable.loadableConditionsMet(this, target)) {
             if (isStationary()) {
@@ -51,6 +66,12 @@ abstract class TransportVehicle extends MotorVehicle {
 
     protected abstract boolean modelSpecificConditionsMet(Transportable target);
 
+    /**
+     * Makes sure the TransportVehicle can be loaded.
+     * @param target the Transportable to be loaded.
+     * @return true if conditions are met.
+     * @throws Exception if conditions are not met.
+     */
     private boolean canLoad(Transportable target) throws Exception {
         if (modelSpecificConditionsMet(target)) {
             return genericConditionsMet(target);
@@ -59,11 +80,22 @@ abstract class TransportVehicle extends MotorVehicle {
         }
     }
 
+    /**
+     * Loads the Transportable onto the TransportVehicle.
+     * @param target the Transportable to be loaded.
+     * @throws Exception if the Transportable cannot be loaded due to it not fulfilling the conditions.
+     */
     public void load(Transportable target) throws Exception {
         if (canLoad(target)) {
             loadable.calculateLoad(target);
         }
     }
+
+    /**
+     * Unloads the target from the TransportVehicle.
+     * @param target the Transportable to be unloaded.
+     * @throws Exception if the Transportable is not available to be unloaded.
+     */
     public void unload(Transportable target) throws Exception {
         loadable.unload(target);
     }
