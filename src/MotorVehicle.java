@@ -14,6 +14,14 @@ abstract class MotorVehicle implements Movable {
     protected boolean engineOn;
     protected boolean allowedToMove;
 
+    /**
+     * Constructor for rudimentary parts of a motor vehicle
+     * @param nrDoors The number of doors the vehicle has
+     * @param enginePower The maximum engine power the vehicle has
+     * @param color the color of the vehicle
+     * @param modelName the vehicles model name
+     * @param weight the vehicles weight
+     */
     protected void commonAssembler(int nrDoors, int enginePower, Color color, String modelName, int weight) {
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
@@ -87,6 +95,12 @@ abstract class MotorVehicle implements Movable {
     private void decrementSpeed(double amount) {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
     }
+
+    /**
+     * Method that increases the vehicles current speed by an amount
+     * @param amount The amount of which the speed should increase given between 0, and 1
+     * @throws Exception Throws a custom exception depending on error
+     */
     public void gas(double amount) throws Exception {
         if (allowedToMove) {
             if (amount <= 1 && amount >= 0) {
@@ -98,6 +112,11 @@ abstract class MotorVehicle implements Movable {
             throw new Exception("MotorVehicle not allowed to move on it's own at the moment.");
         }
     }
+    /**
+     * Method that decreases the vehicles current speed by an amount
+     * @param amount The amount of which the speed should decrease given between 0, and 1
+     * @throws InvalidParameterException Throws a custom exception depending on error
+     */
     public void brake(double amount) throws InvalidParameterException {
         if (amount <= 1 && amount >= 0) {
             decrementSpeed(amount);
