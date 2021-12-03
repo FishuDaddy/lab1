@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MANTest {
 
     @Test
-    public void yo() {
+    public void rampTest() {
         MAN man = new MAN();
         Saab95 saab = new Saab95();
         man.toggleRamp();

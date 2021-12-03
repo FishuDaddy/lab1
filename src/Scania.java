@@ -13,6 +13,9 @@ public class Scania extends TransportVehicle {
         transportAssembler(40000, 10, 10, true);
         modelSpecificConstructor();
     }
+    public boolean isPlatformRaised() {
+        return (platformRaised);
+    }
 
     private void modelSpecificConstructor() {
         platformRaised = false;
