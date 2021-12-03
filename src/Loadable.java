@@ -2,6 +2,10 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents an object that is able to load and unload vehicles, depending
+ * on a set of conditions
+ */
 public class Loadable {
 
     protected int capacity;
