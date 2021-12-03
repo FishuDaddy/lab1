@@ -9,6 +9,7 @@ class Saab95 extends TransportableCar {
         dir = 45;
     }
 
+
     public void setTurboOn(){
 	    turboOn = true;
     }

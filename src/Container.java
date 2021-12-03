@@ -1,3 +1,6 @@
+/**
+ * Generic transportable object.
+ */
 public class Container implements Transportable {
     private double x;
     private double y;

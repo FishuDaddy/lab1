@@ -1,3 +1,7 @@
+/**
+ * MotorVehicle which can load TransportableCars.
+ */
+
 import java.awt.*;
 
 public class MAN extends TransportVehicle {

@@ -1,3 +1,7 @@
+/**
+ * MotorVehicle which can load Transportables not belonging to the TransportableVehicle Class.
+ */
+
 import java.awt.*;
 
 public class Scania extends TransportVehicle {
@@ -47,6 +51,10 @@ public class Scania extends TransportVehicle {
             throw new Exception("Platform needs to be raised before use");
         }
     }
+    /**
+     * Lowers the angle of the platform by 5 degrees.
+     * @throws Exception if it exceeds 70 degrees.
+     */
     public void lowerPlatform() throws Exception {
         if (platformRaised && platformAngle > 0 && isStationary()) {
             platformAngle -= 5;
@@ -57,9 +65,14 @@ public class Scania extends TransportVehicle {
         }
     }
 
+    /**
+     * Can only load the Scania if the platform is raised.
+     * @param target the target to be loaded.
+     * @return
+     */
     @Override
     protected boolean modelSpecificConditionsMet(Transportable target) {
-        if (!platformRaised) {
+        if (platformRaised) {
             return !(target instanceof MotorVehicle);
         } else return false;
     }

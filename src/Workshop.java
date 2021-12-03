@@ -1,3 +1,7 @@
+/**
+ * An object which can accept instances of Transportable
+ * @param <T> a sub-object of Transportable which can enter the workshop.
+ */
 public class Workshop<T extends Transportable> implements CoordinateDependent {
     private double x;
     private double y;
@@ -8,6 +12,12 @@ public class Workshop<T extends Transportable> implements CoordinateDependent {
     public double getY() {
         return y;
     }
+
+    /**
+     * Sets the coordinates of the Workshop-
+     * @param x the x coordinate.
+     * @param y the y coordinate.
+     */
     public void setCoordinates(double x, double y) {
         this.x = x;
         this.y = y;
@@ -29,6 +39,10 @@ public class Workshop<T extends Transportable> implements CoordinateDependent {
         }
     }
 
+    /**
+     * Returns the amount of vehicles inside the Workshop.
+     * @return amount of vehicles in workshop.
+     */
     public int getInWorkshop() {
         return(loadable.getOnTransport());
     }
