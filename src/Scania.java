@@ -33,8 +33,13 @@ public class Scania extends TransportVehicle {
             throw new Exception("Vehicle need to be stationary to use the platform");
         }
     }
+
+    /**
+     * Raises the angle of the platform by 5 degrees.
+     * @throws Exception if it exceeds 70 degrees.
+     */
     public void raisePlatform() throws Exception {
-        if (platformRaised && platformAngle < 70) {
+        if (platformRaised && platformAngle < 70 && isStationary()) {
             platformAngle += 5;
         } else if (platformAngle >= 70) {
             throw new Exception("Platform cannot be raised above 70 degrees");
@@ -43,7 +48,7 @@ public class Scania extends TransportVehicle {
         }
     }
     public void lowerPlatform() throws Exception {
-        if (platformRaised && platformAngle > 0) {
+        if (platformRaised && platformAngle > 0 && isStationary()) {
             platformAngle -= 5;
         } else if (platformAngle <= 0) {
             throw new Exception("Platform cannot be lowered below 0 degrees");

@@ -2,7 +2,6 @@ public class Workshop<T extends Transportable> implements CoordinateDependent {
     private double x;
     private double y;
     private Loadable loadable;
-    private T type;
     public double getX() {
         return x;
     }
@@ -39,7 +38,7 @@ public class Workshop<T extends Transportable> implements CoordinateDependent {
      * @param target the Transportable to be unloaded.
      * @throws Exception if the target does not fulfill the conditions to be unloaded.
      */
-    public void unload(Transportable target) throws Exception {
+    public void unload(T target) throws Exception {
         loadable.unload(target);
     }
 }
