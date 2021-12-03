@@ -37,7 +37,7 @@ public class CarTest {
         assertEquals(Color.yellow, volvo1.getColor());
     }
     @Test
-    public void shouldNotBeAbleToGasWithEngineOff(){
+    public void shouldNotBeAbleToGasWithEngineOff() throws Exception {
         Volvo240 volvo = new Volvo240(); // A car should not be able to accelerate without the engine being on
         volvo.gas(1);
         assertEquals(0, volvo.getCurrentSpeed(), 0.01);
@@ -50,7 +50,7 @@ public class CarTest {
         assertEquals(0, volvo.x, 0.01);
     }
     @Test
-    public void should_move_if_engineOn() throws InvalidParameterException {
+    public void should_move_if_engineOn() throws Exception {
         Volvo240 volvo = new Volvo240();
         volvo.dir = 90;
         volvo.y = 0;
@@ -67,7 +67,7 @@ public class CarTest {
         assertFalse(volvo.engineOn);
     }
     @Test
-    public void brake_should_lower_currentSpeed() throws InvalidParameterException {
+    public void brake_should_lower_currentSpeed() throws Exception {
         Volvo240 volvo = new Volvo240();
         volvo.toggleEngine();
         volvo.gas(1);
@@ -84,6 +84,13 @@ public class CarTest {
     }
     @Test
     public void exceptionShouldBeThrownGas(){
+        InvalidParameterException thrown =  assertThrows(InvalidParameterException.class, () -> {
+            Volvo240 volvo = new Volvo240();
+            volvo.gas(10);
+        });
+    }
+    @Test
+    public void exceptionShouldNotBeAbleToMove(){
         InvalidParameterException thrown =  assertThrows(InvalidParameterException.class, () -> {
             Volvo240 volvo = new Volvo240();
             volvo.gas(10);

@@ -30,6 +30,10 @@ public class Workshop<T extends Transportable> implements CoordinateDependent {
         }
     }
 
+    public int getInWorkshop() {
+        return(loadable.getOnTransport());
+    }
+
     /**
      * Unloads the target from the Worshop.
      * @param target the Transportable to be unloaded.

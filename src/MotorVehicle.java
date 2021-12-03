@@ -21,6 +21,7 @@ abstract class MotorVehicle implements Movable {
         this.modelName = modelName;
         this.weight = weight;
         engineOn = false;
+        allowedToMove = true;
     }
 
     public int getNrDoors(){
@@ -86,13 +87,15 @@ abstract class MotorVehicle implements Movable {
     private void decrementSpeed(double amount) {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
     }
-    public void gas(double amount) throws InvalidParameterException{
+    public void gas(double amount) throws Exception {
         if (allowedToMove) {
             if (amount <= 1 && amount >= 0) {
                 incrementSpeed(amount);
             } else {
                 throw new InvalidParameterException("Please input an amount in the interval [0,1]");
             }
+        } else {
+            throw new Exception("MotorVehicle not allowed to move on it's own at the moment.");
         }
     }
     public void brake(double amount) throws InvalidParameterException {

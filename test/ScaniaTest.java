@@ -23,6 +23,6 @@ public class ScaniaTest {
     @Test
     public void ShouldBeStationary() {
         Scania scania = new Scania();
-        assertFalse(scania.isStationary());
+        assertTrue(scania.isStationary());
     }
 }

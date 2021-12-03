@@ -1,4 +1,5 @@
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Loadable {
@@ -9,7 +10,7 @@ public class Loadable {
     protected int transportedWeight;
     private final boolean isOrderDependent;
     private final int maxWeight;
-    List<Transportable> onTransport;
+    ArrayList<Transportable> onTransport;
 
     /**
      * Constructor for Loadable
@@ -19,6 +20,7 @@ public class Loadable {
      * @param isOrderDependent whether the Transportables should be able to be removed in only the reverse order that they were added or freely.
      */
     public Loadable(int capacity, int loadThreshold, int maxWeight, boolean isOrderDependent) {
+        onTransport = new ArrayList<>();
         this.capacity = capacity;
         this.loadThreshold = loadThreshold;
         this.maxWeight = maxWeight;
@@ -79,6 +81,10 @@ public class Loadable {
         } else {
             throw new Exception("Transportable cannot be loaded at the moment.");
         }
+    }
+
+    protected int getOnTransport() {
+        return (onTransport.size());
     }
 
     /**
