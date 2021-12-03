@@ -1,9 +1,8 @@
+import java.awt.*;
+
 /**
  * MotorVehicle which can load Transportables not belonging to the TransportableVehicle Class.
  */
-
-import java.awt.*;
-
 public class Scania extends TransportVehicle {
 
     private boolean platformRaised;
