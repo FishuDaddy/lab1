@@ -72,7 +72,7 @@ abstract class MotorVehicle implements Movable {
         return currentSpeed == 0;
     }
 
-    protected void toggleEngine(){
+    public void toggleEngine(){
         if (!engineOn){
             engineOn = true;
             currentSpeed = 0.1;
