@@ -96,4 +96,32 @@ public class CarController {
             car.gas(gasAmount);
         }
     }
+    void setTurboOn() {
+        for (MotorVehicle car : cars) {
+            if (car instanceof Saab95) {
+                ((Saab95) car).setTurboOn();
+            }
+        }
+    }
+    void setTurboOff() {
+        for (MotorVehicle car : cars) {
+            if (car instanceof Saab95) {
+                ((Saab95) car).setTurboOff();
+            }
+        }
+    }
+    void liftBed() throws Exception {
+        for (MotorVehicle car : cars) {
+            if (car instanceof Scania && !((Scania) car).isPlatformRaised()) {
+                ((Scania) car).togglePlatform();
+            }
+        }
+    }
+    void lowerBed() throws Exception {
+        for (MotorVehicle car : cars) {
+            if (car instanceof Scania && ((Scania) car).isPlatformRaised()) {
+                ((Scania) car).togglePlatform();
+            }
+        }
+    }
 }

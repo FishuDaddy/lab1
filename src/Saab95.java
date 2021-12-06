@@ -10,8 +10,6 @@ class Saab95 extends TransportableCar {
         x = 0;
         y = 100;
     }
-
-
     public void setTurboOn(){
 	    turboOn = true;
     }
