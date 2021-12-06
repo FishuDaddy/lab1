@@ -6,7 +6,9 @@ class Saab95 extends TransportableCar {
     public Saab95() {
         commonAssembler(2, 125, Color.red, "Saab95", 1610);
         turboOn = false;
-        dir = 45;
+        dir = 60;
+        x = 0;
+        y = 100;
     }
 
 

@@ -3,8 +3,8 @@
  * @param <T> a sub-object of Transportable which can enter the workshop.
  */
 public class Workshop<T extends Transportable> implements CoordinateDependent {
-    private double x;
-    private double y;
+    private int x;
+    private int y;
     private Loadable loadable;
     public double getX() {
         return x;
@@ -18,11 +18,11 @@ public class Workshop<T extends Transportable> implements CoordinateDependent {
      * @param x the x coordinate.
      * @param y the y coordinate.
      */
-    public void setCoordinates(double x, double y) {
+    public void setCoordinates(int x, int y) {
         this.x = x;
         this.y = y;
     }
-    public Workshop(double x, double y, int threshold, int capacity, int maxWeight) {
+    public Workshop(int x, int y, int threshold, int capacity, int maxWeight) {
         this.x = x;
         this.y = y;
         loadable = new Loadable(capacity, threshold, maxWeight, false);

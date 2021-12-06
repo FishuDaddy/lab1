@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -30,6 +31,9 @@ public class CarController {
         CarController cc = new CarController();
 
         cc.cars.add(new Volvo240());
+        cc.cars.add(new Scania());
+        cc.cars.add(new Saab95());
+
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -44,21 +48,24 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (MotorVehicle car : cars) {
+
+                if (car.getX() < 0) {
+                    car.setDirection(car.dir += 180);
+                } else if (car.getY() < 0) {
+                    car.setDirection(car.dir += 180);
+                } else if (car.getX() > frame.getWidth() - 100) { // Image width
+                    car.setDirection(car.dir += 180);
+                } else if (car.getY() > frame.getHeight() - 300) { // Image height + control bar height
+                    car.setDirection(car.dir += 180);
+                }
+
                 car.move();
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
 
-                if (car.x <= 0) {
-                    car.setDirection(car.dir += 180);
-                } else if (car.y <= 0) {
-                    car.setDirection(car.dir += 180);
-                } else if (car.x >= frame.getWidth() - 100) {
-                    car.setDirection(car.dir += 180);
-                } else if (car.y >= frame.getHeight() - 300) {
-                    car.setDirection(car.dir += 180);
-                }
 
-                frame.drawPanel.moveit(x, y);
+
+                frame.drawPanel.moveit(car, x, y);
 
 
                 // repaint() calls the paintComponent method of the panel
@@ -66,22 +73,27 @@ public class CarController {
             }
         }
     }
-    void toggleEngine() {
+    void toggleEngineOn() {
         for (MotorVehicle car : cars) {
-            car.toggleEngine();
+            car.toggleEngineOn();
+        }
+    }
+    void toggleEngineOff() {
+        for (MotorVehicle car : cars) {
+            car.toggleEngineOff();
         }
     }
     void brake(int amount) {
-        double brake = ((double) amount) / 100;
+        double brakeAmount = ((double) amount) / 100;
         for (MotorVehicle car : cars) {
-            car.brake(brake);
+            car.brake(brakeAmount);
         }
     }
     // Calls the gas method for each car once
     void gas(int amount) throws Exception {
-        double gas = ((double) amount) / 100;
+        double gasAmount = ((double) amount) / 100;
         for (MotorVehicle car : cars) {
-            car.gas(gas);
+            car.gas(gasAmount);
         }
     }
 }

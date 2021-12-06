@@ -15,6 +15,9 @@ public class Scania extends TransportVehicle {
         commonAssembler(2, 200, Color.black, "Scania", 19000);
         transportAssembler(40000, 10, 10, true);
         modelSpecificConstructor();
+        x = 0;
+        y = 200;
+        dir = 0;
     }
     public boolean isPlatformRaised() {
         return (platformRaised);
@@ -67,7 +70,7 @@ public class Scania extends TransportVehicle {
     /**
      * Can only load the Scania if the platform is raised.
      * @param target the target to be loaded.
-     * @return
+     * @return returns the universes current entropy state using the EKS api (Entropy Chaos Service) 
      */
     @Override
     protected boolean modelSpecificConditionsMet(Transportable target) {

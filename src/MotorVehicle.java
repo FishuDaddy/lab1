@@ -8,8 +8,9 @@ abstract class MotorVehicle implements Movable {
     protected double currentSpeed; // The current speed of the car
     protected Color color; // Color of the car
     protected String modelName; // The car model name
-    protected double x;
-    protected double y;
+    protected int x;
+    protected int y;
+    protected Point Coordinate = new Point(x, y);
     protected double dir; // The Car's direction in Degrees, subject to tweaks
     protected boolean engineOn;
     protected boolean allowedToMove;
@@ -28,8 +29,8 @@ abstract class MotorVehicle implements Movable {
         this.color = color;
         this.modelName = modelName;
         this.weight = weight;
-        engineOn = false;
-        allowedToMove = true;
+        this.engineOn = false;
+        this.allowedToMove = true;
     }
 
     public int getNrDoors(){
@@ -51,13 +52,13 @@ abstract class MotorVehicle implements Movable {
     public double getY() {
         return y;
     }
-    public void setX(double x) {
+    public void setX(int x) {
         this.x = x;
     }
-    public void setY(double y) {
+    public void setY(int y) {
         this.y = y;
     }
-    public void setCoordinates(double x, double y) {
+    public void setCoordinates(int x, int y) {
         setX(x);
         setY(y);
     }
@@ -77,6 +78,18 @@ abstract class MotorVehicle implements Movable {
             engineOn = true;
             currentSpeed = 0.1;
         } else {
+            engineOn = false;
+            currentSpeed = 0;
+        }
+    }
+    public void toggleEngineOn() {
+        if (!engineOn) {
+            engineOn = true;
+            currentSpeed = 2;
+        }
+    }
+    public void toggleEngineOff() {
+        if (engineOn) {
             engineOn = false;
             currentSpeed = 0;
         }

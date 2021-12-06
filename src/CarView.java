@@ -64,11 +64,7 @@ public class CarView extends JFrame{
                         100, //max
                         1);//step
         gasSpinner = new JSpinner(spinnerModel);
-        gasSpinner.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
-                gasAmount = (int) ((JSpinner)e.getSource()).getValue();
-            }
-        });
+        gasSpinner.addChangeListener(e -> gasAmount = (int) ((JSpinner)e.getSource()).getValue());
 
         gasPanel.setLayout(new BorderLayout());
         gasPanel.add(gasLabel, BorderLayout.PAGE_START);
@@ -102,32 +98,22 @@ public class CarView extends JFrame{
 
         // This actionListener is for the gas button only
         // TODO: Create more for each component as necessary
-        gasButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    carC.gas(gasAmount);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+        gasButton.addActionListener(e -> {
+            try {
+                carC.gas(gasAmount);
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
         });
-        brakeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    carC.brake(gasAmount);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+        brakeButton.addActionListener(e -> {
+            try {
+                carC.brake(gasAmount);
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
         });
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.toggleEngine();
-            }
-        });
+        startButton.addActionListener(e -> carC.toggleEngineOn());
+        stopButton.addActionListener(e -> carC.toggleEngineOff());
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();

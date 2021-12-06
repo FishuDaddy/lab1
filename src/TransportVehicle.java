@@ -102,11 +102,10 @@ abstract class TransportVehicle extends MotorVehicle {
 
     double speedFactor() {
         if (allowedToMove) {
-            return enginePower * 0.3 * ((double)(maxWeight/(weight + loadable.getWeight())));
+            return enginePower * 0.005;
         } else {
             return 0; // Makes it so that incrementSpeed returns 0
         }
     }
 
 }
-

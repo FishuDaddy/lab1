@@ -16,7 +16,7 @@ public class Container implements Transportable {
     }
 
     @Override
-    public void setCoordinates(double x, double y) {
+    public void setCoordinates(int x, int y) {
         this.x = x;
         this.y = y;
     }
