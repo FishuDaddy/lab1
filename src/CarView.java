@@ -41,9 +41,9 @@ public class CarView extends JFrame{
     JButton stopButton = new JButton("Stop all cars");
 
     // Constructor
-    public CarView(String framename, CarController cc){
+    public CarView(String frameName, CarController cc){
         this.carC = cc;
-        initComponents(framename);
+        initComponents(frameName);
     }
 
     // Sets everything in place and fits everything
@@ -112,8 +112,30 @@ public class CarView extends JFrame{
                 ex.printStackTrace();
             }
         });
+
+        // Start And Stop
         startButton.addActionListener(e -> carC.toggleEngineOn());
         stopButton.addActionListener(e -> carC.toggleEngineOff());
+
+        // Set Turbo ON or OFF
+        turboOnButton.addActionListener(e -> carC.setTurboOn());
+        turboOffButton.addActionListener(e -> carC.setTurboOff());
+
+        // Lift and lower Bed
+        liftBedButton.addActionListener(e -> {
+            try {
+                carC.liftBed();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        lowerBedButton.addActionListener(e -> {
+            try {
+                carC.lowerBed();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
