@@ -2,7 +2,7 @@
  * An object which can accept instances of Transportable
  * @param <T> a sub-object of Transportable which can enter the workshop.
  */
-public class Workshop<T extends Transportable> implements CoordinateDependent {
+public class Workshop<T extends Transportable> implements Mappable {
     private int x;
     private int y;
     private Loadable loadable;

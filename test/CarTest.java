@@ -43,7 +43,7 @@ public class CarTest {
         assertEquals(0, volvo.getCurrentSpeed(), 0.01);
     }
     @Test
-    public void move_not_should_move_if_engineOff(){
+    public void move_not_should_move_if_engineOff() throws Exception {
         Volvo240 volvo = new Volvo240();
         volvo.dir = 45;
         volvo.move();

@@ -139,9 +139,13 @@ abstract class MotorVehicle implements Movable {
     }
 
     @Override
-    public void move(){
-        this.x += getCurrentSpeed() * Math.cos(Math.toRadians(this.dir));
-        this.y += getCurrentSpeed() * Math.sin(Math.toRadians(this.dir));
+    public void move() throws Exception {
+        if (allowedToMove) {
+            this.x += getCurrentSpeed() * Math.cos(Math.toRadians(this.dir));
+            this.y += getCurrentSpeed() * Math.sin(Math.toRadians(this.dir));
+        } else {
+            throw new Exception("Vehicle Can't move right now.");
+        }
     }
 
     @Override

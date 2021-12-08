@@ -2,11 +2,11 @@
  * Interface for implementation of methods used for movement
  */
 
-public interface Movable extends DirectionAndCoordinateDependent {
+public interface Movable extends Rotatable {
     /**
      * Method for moving the Movable.
      */
-    void move();
+    void move() throws Exception;
 
     /**
      * Method for turning the Movable left.

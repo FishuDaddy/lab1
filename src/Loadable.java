@@ -1,6 +1,4 @@
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Represents an object that is able to load and unload vehicles, depending
@@ -38,7 +36,7 @@ public class Loadable {
      * @param target the target which coordinates is compared to the location of the transport.
      * @return true if the condition is met, false if not.
      */
-    private boolean isWithinThreshold(CoordinateDependent goal, Transportable target) {
+    private boolean isWithinThreshold(Mappable goal, Transportable target) {
         if (target.getX() <= goal.getX() + this.loadThreshold  || target.getX() >= goal.getX() - this.loadThreshold) {
             return target.getY() <= goal.getX() + this.loadThreshold || target.getY() >= goal.getY() - this.loadThreshold;
         } else {
@@ -69,7 +67,7 @@ public class Loadable {
      * @return true if conditions met, false if not.
      * @throws Exception if a condition is not met.
      */
-    protected boolean loadableConditionsMet(CoordinateDependent goal, Transportable target) throws Exception {
+    protected boolean loadableConditionsMet(Mappable goal, Transportable target) throws Exception {
         if (target.canBeLoaded()) {
             if (isWithinThreshold(goal, target)) {
                 if (isNotFull()) {

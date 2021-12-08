@@ -15,12 +15,14 @@ abstract class TransportVehicle extends MotorVehicle {
      * Moves the Transporter as well as all the Transportables on-board.
      */
     @Override
-    public void move(){
-        this.x += getCurrentSpeed() * Math.cos(Math.toRadians(this.dir));
-        this.y += getCurrentSpeed() * Math.sin(Math.toRadians(this.dir));
-        for (Transportable transported : loadable.onTransport) {
-            transported.setCoordinates(this.x, this.y);
-        }
+    public void move() throws Exception {
+        if (allowedToMove) {
+            this.x += getCurrentSpeed() * Math.cos(Math.toRadians(this.dir));
+            this.y += getCurrentSpeed() * Math.sin(Math.toRadians(this.dir));
+            for (Transportable transported : loadable.onTransport) {
+                transported.setCoordinates(this.x, this.y);
+            }
+        } else throw new Exception("Car cannot move at the time");
     }
 
     /**

@@ -17,7 +17,7 @@ public class CarController {
     private final int delay = 50;
     // The timer is started with an listener (see below) that executes the statements
     // each step between delays.
-    private Timer timer = new Timer(delay, new TimerListener());
+    private final Timer timer = new Timer(delay, new TimerListener());
 
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
@@ -59,7 +59,13 @@ public class CarController {
                     car.setDirection(car.dir += 180);
                 }
 
-                car.move();
+                try {
+                    car.move();
+                    int x = (int) Math.round(car.getX());
+                    int y = (int) Math.round(car.getY());
+                } catch (Exception ex) {
+                    System.out.println("Move error on " + car);
+                }
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
 
