@@ -2,43 +2,38 @@
  * Generic transportable object.
  */
 public class Container implements Transportable {
-    private double x;
-    private double y;
     private final int weight;
-    private double angle;
     private boolean beingTransported;
-    public Container(double x, double y, int weight, double angle) {
-        this.x = x;
-        this.y = y;
+    protected Position pos;
+    public Container(int x, int y, int weight, int angle) {
         this.weight = weight;
-        this.angle = angle;
         beingTransported = false;
+        this.pos = new Position(x, y, angle);
     }
 
     @Override
     public void setCoordinates(int x, int y) {
-        this.x = x;
-        this.y = y;
+        this.pos.setLocation(x, y);
     }
 
     @Override
-    public double getX() {
-        return x;
+    public int getX() {
+        return (int) pos.getX();
     }
 
     @Override
-    public double getY() {
-        return y;
+    public int getY() {
+        return (int) pos.getY();
     }
 
     @Override
-    public void setDirection(double direction) {
-        this.angle = direction;
+    public void setDirection(int direction) {
+        this.pos.setDirection(direction);
     }
 
     @Override
-    public double getDirection() {
-        return(angle);
+    public int getDirection() {
+        return this.pos.getDirection();
     }
 
     @Override

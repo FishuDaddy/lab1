@@ -6,10 +6,10 @@ public class Workshop<T extends Transportable> implements Mappable {
     private int x;
     private int y;
     private Loadable loadable;
-    public double getX() {
+    public int getX() {
         return x;
     }
-    public double getY() {
+    public int getY() {
         return y;
     }
 

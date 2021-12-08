@@ -15,9 +15,7 @@ public class Scania extends TransportVehicle {
         commonAssembler(2, 200, Color.black, "Scania", 19000);
         transportAssembler(40000, 10, 10, true);
         modelSpecificConstructor();
-        x = 0;
-        y = 200;
-        dir = 0;
+        pos = new Position(0, 200, 60);
     }
     public boolean isPlatformRaised() {
         return (platformRaised);

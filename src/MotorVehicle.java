@@ -8,10 +8,7 @@ abstract class MotorVehicle implements Movable {
     protected double currentSpeed; // The current speed of the car
     protected Color color; // Color of the car
     protected String modelName; // The car model name
-    protected int x;
-    protected int y;
-    protected Point Coordinate = new Point(x, y);
-    protected double dir; // The Car's direction in Degrees, subject to tweaks
+    protected Position pos;
     protected boolean engineOn;
     protected boolean allowedToMove;
 
@@ -46,27 +43,30 @@ abstract class MotorVehicle implements Movable {
         return color;
     }
     protected void setColor(Color clr) {color = clr;}
-    public double getX() {
-        return x;
+
+    public int getX() {
+        return (int) this.pos.getX();
     }
-    public double getY() {
-        return y;
+    public int getY() {
+        return (int) this.pos.getY();
     }
-    public void setX(int x) {
-        this.x = x;
+    public void setX(double x) {
+        this.pos.x = (int) x;
     }
-    public void setY(int y) {
-        this.y = y;
+    public void setY(double y) {
+        this.pos.y = (int) y;
     }
     public void setCoordinates(int x, int y) {
-        setX(x);
-        setY(y);
+        this.pos.setLocation(x, y);
     }
-    public void setDirection(double direction) {
-        this.dir = direction;
+    public void setDirection(int direction) {
+        this.pos.setDirection(direction);
     }
-    public double getDirection(){
-        return dir;
+    public int getDirection(){
+        return pos.getDirection();
+    }
+    public void incDirection(int amount) {
+        pos.incDirection(amount);
     }
 
     public boolean isStationary() {
@@ -141,8 +141,8 @@ abstract class MotorVehicle implements Movable {
     @Override
     public void move() throws Exception {
         if (allowedToMove) {
-            this.x += getCurrentSpeed() * Math.cos(Math.toRadians(this.dir));
-            this.y += getCurrentSpeed() * Math.sin(Math.toRadians(this.dir));
+            this.setX(this.getX() + getCurrentSpeed() * Math.cos(Math.toRadians(this.getDirection())));
+            this.setY(this.getY() + getCurrentSpeed() * Math.sin(Math.toRadians(this.getDirection())));
         } else {
             throw new Exception("Vehicle Can't move right now.");
         }
@@ -150,12 +150,10 @@ abstract class MotorVehicle implements Movable {
 
     @Override
     public void turnLeft(){
-        this.dir += 45;
-        this.dir %= 360;
+        this.incDirection(45);
     }
     @Override
     public void turnRight() {
-        this.dir -= 45;
-        this.dir %= 360;
+        this.incDirection(-45);
     }
 }

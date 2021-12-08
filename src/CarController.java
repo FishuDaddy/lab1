@@ -50,24 +50,23 @@ public class CarController {
             for (MotorVehicle car : cars) {
 
                 if (car.getX() < 0) {
-                    car.setDirection(car.dir += 180);
+                    car.incDirection(180);
                 } else if (car.getY() < 0) {
-                    car.setDirection(car.dir += 180);
+                    car.incDirection(180);
                 } else if (car.getX() > frame.getWidth() - 100) { // Image width
-                    car.setDirection(car.dir += 180);
+                    car.incDirection(180);
                 } else if (car.getY() > frame.getHeight() - 300) { // Image height + control bar height
-                    car.setDirection(car.dir += 180);
+                    car.incDirection(180);
                 }
-
                 try {
                     car.move();
-                    int x = (int) Math.round(car.getX());
-                    int y = (int) Math.round(car.getY());
+                    int x = Math.round(car.getX());
+                    int y = Math.round(car.getY());
                 } catch (Exception ex) {
                     System.out.println("Move error on " + car);
                 }
-                int x = (int) Math.round(car.getX());
-                int y = (int) Math.round(car.getY());
+                int x = Math.round(car.getX());
+                int y = Math.round(car.getY());
 
 
 

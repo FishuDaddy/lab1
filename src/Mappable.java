@@ -3,6 +3,6 @@
  */
 public interface Mappable {
     void setCoordinates(int x, int y);
-    double getX();
-    double getY();
+    int getX();
+    int getY();
 }

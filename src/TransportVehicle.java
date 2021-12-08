@@ -17,10 +17,10 @@ abstract class TransportVehicle extends MotorVehicle {
     @Override
     public void move() throws Exception {
         if (allowedToMove) {
-            this.x += getCurrentSpeed() * Math.cos(Math.toRadians(this.dir));
-            this.y += getCurrentSpeed() * Math.sin(Math.toRadians(this.dir));
+            this.setX(this.getX() + getCurrentSpeed() * Math.cos(Math.toRadians(this.getDirection())));
+            this.setY(this.getY() + getCurrentSpeed() * Math.sin(Math.toRadians(this.getDirection())));
             for (Transportable transported : loadable.onTransport) {
-                transported.setCoordinates(this.x, this.y);
+                transported.setCoordinates(this.getX(), this.getY());
             }
         } else throw new Exception("Car cannot move at the time");
     }
@@ -30,8 +30,7 @@ abstract class TransportVehicle extends MotorVehicle {
      */
     @Override
     public void turnLeft(){
-        this.dir += 45;
-        this.dir %= 360;
+        this.incDirection(45);
         for (Transportable transported : loadable.onTransport) {
             transported.setDirection(this.getDirection());
         }
@@ -41,8 +40,7 @@ abstract class TransportVehicle extends MotorVehicle {
      */
     @Override
     public void turnRight() {
-        this.dir -= 45;
-        this.dir %= 360;
+        this.incDirection(-45);
         for (Transportable transported : loadable.onTransport) {
             transported.setDirection(this.getDirection());
         }

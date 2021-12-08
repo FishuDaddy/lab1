@@ -21,9 +21,9 @@ public class CarTest {
     @Test
     public void car_should_turn_45_degrees() {
         Volvo240 volvo = new Volvo240();
-        volvo.dir = 315;
+        volvo.setDirection(315);
         volvo.turnLeft();
-        assertEquals(0, volvo.dir);
+        assertEquals(0, volvo.getDirection());
     }
     @Test
     public void test_both_startEngine(){
@@ -45,19 +45,19 @@ public class CarTest {
     @Test
     public void move_not_should_move_if_engineOff() throws Exception {
         Volvo240 volvo = new Volvo240();
-        volvo.dir = 45;
+        volvo.setDirection(45);
         volvo.move();
-        assertEquals(0, volvo.x, 0.01);
+        assertEquals(0, volvo.getX(), 0.01);
     }
     @Test
     public void should_move_if_engineOn() throws Exception {
         Volvo240 volvo = new Volvo240();
-        volvo.dir = 90;
-        volvo.y = 0;
+        volvo.setDirection(90);
+        volvo.setY(0);
         volvo.toggleEngine();
         volvo.gas(1);
         volvo.move();
-        assertTrue(volvo.y > 0);
+        assertTrue(volvo.getY() > 0);
     }
     @Test
     public void togglingEngineOnOffShouldBeOff(){
@@ -78,9 +78,9 @@ public class CarTest {
     @Test
     public void turn_right_should_45(){
         Volvo240 volvo = new Volvo240();
-        volvo.dir = 90;
+        volvo.setX(90);
         volvo.turnRight();
-        assertEquals(45, volvo.dir);
+        assertEquals(45, volvo.getDirection());
     }
     @Test
     public void exceptionShouldBeThrownGas(){
