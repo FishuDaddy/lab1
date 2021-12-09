@@ -6,7 +6,6 @@ class Saab95 extends TransportableCar {
     public Saab95() {
         commonAssembler(2, 125, Color.red, "Saab95", 1610);
         turboOn = false;
-        pos = new Position(0, 100, 60);
     }
     public void setTurboOn(){
 	    turboOn = true;

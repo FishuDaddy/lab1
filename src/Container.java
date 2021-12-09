@@ -12,28 +12,28 @@ public class Container implements Transportable {
     }
 
     @Override
-    public void setCoordinates(int x, int y) {
-        this.pos.setLocation(x, y);
+    public void setCoordinates(double x, double y) {
+        this.pos.setCoordinates(x, y);
     }
 
     @Override
-    public int getX() {
+    public double getX() {
         return (int) pos.getX();
     }
 
     @Override
-    public int getY() {
+    public double getY() {
         return (int) pos.getY();
     }
 
     @Override
-    public void setDirection(int direction) {
-        this.pos.setDirection(direction);
+    public void setDirection(double direction) {
+        pos.setDirection(direction);
     }
 
     @Override
-    public int getDirection() {
-        return this.pos.getDirection();
+    public double getDirection() {
+        return pos.getDirection();
     }
 
     @Override

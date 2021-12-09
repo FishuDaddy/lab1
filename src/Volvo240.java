@@ -6,7 +6,6 @@ class Volvo240 extends TransportableCar {
     
     public Volvo240(){
         commonAssembler(4, 100, Color.black, "Volvo240", 1400);
-        pos = new Position(0, 0, 45);
      }
     double speedFactor(){
         return enginePower * 0.01 * trimFactor;

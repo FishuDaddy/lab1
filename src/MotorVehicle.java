@@ -8,7 +8,7 @@ abstract class MotorVehicle implements Movable {
     protected double currentSpeed; // The current speed of the car
     protected Color color; // Color of the car
     protected String modelName; // The car model name
-    protected Position pos;
+    private Position pos;
     protected boolean engineOn;
     protected boolean allowedToMove;
 
@@ -28,6 +28,7 @@ abstract class MotorVehicle implements Movable {
         this.weight = weight;
         this.engineOn = false;
         this.allowedToMove = true;
+        pos = new Position();
     }
 
     public int getNrDoors(){
@@ -44,29 +45,31 @@ abstract class MotorVehicle implements Movable {
     }
     protected void setColor(Color clr) {color = clr;}
 
-    public int getX() {
-        return (int) this.pos.getX();
+    public double getX() {
+        return pos.getX();
     }
-    public int getY() {
-        return (int) this.pos.getY();
+    public double getY() {
+        return pos.getY();
     }
     public void setX(double x) {
-        this.pos.x = (int) x;
+        pos.setX(x);
     }
     public void setY(double y) {
-        this.pos.y = (int) y;
+        pos.setY(y);
     }
-    public void setCoordinates(int x, int y) {
-        this.pos.setLocation(x, y);
+    @Override
+    public void setCoordinates(double x, double y) {
+        this.pos.setCoordinates(x, y);
     }
-    public void setDirection(int direction) {
-        this.pos.setDirection(direction);
+    @Override
+    public void setDirection(double direction) {
+        pos.setDirection(direction);
     }
-    public int getDirection(){
+    public void incDirection(double direction) {
+        pos.incDirection(direction);
+    }
+    public double getDirection(){
         return pos.getDirection();
-    }
-    public void incDirection(int amount) {
-        pos.incDirection(amount);
     }
 
     public boolean isStationary() {
@@ -150,10 +153,10 @@ abstract class MotorVehicle implements Movable {
 
     @Override
     public void turnLeft(){
-        this.incDirection(45);
+        pos.incDirection(45);
     }
     @Override
     public void turnRight() {
-        this.incDirection(-45);
+        pos.incDirection(-45);
     }
 }
