@@ -23,9 +23,10 @@ public class CarController {
     CarView frame;
     // A list of cars, modify if needed
     ArrayList<MotorVehicle> cars = new ArrayList<>();
+    CarFactory carFactory = new CarFactory();
 
     //methods:
-    public void start(CarController cc) {
+    public void start(CarController cc) throws Exception {
         initializeCars(cc);
 
         // Start a new view and send a reference of self
@@ -34,14 +35,14 @@ public class CarController {
         // Start the timer
         cc.timer.start();
     }
-    private static void initializeCars(CarController cc) {
-        cc.cars.add(new Volvo240());
+    private static void initializeCars(CarController cc) throws Exception {
+        cc.addCar(cc.carFactory.getCar(CarFactory.CarType.Volvo240));
         cc.cars.get(0).setCoordinates(0, 100);
         cc.cars.get(0).setDirection(30);
-        cc.cars.add(new Scania());
+        cc.addCar(cc.carFactory.getCar(CarFactory.CarType.Scania));
         cc.cars.get(1).setCoordinates(0, 200);
         cc.cars.get(1).setDirection(40);
-        cc.cars.add(new Saab95());
+        cc.addCar(cc.carFactory.getCar(CarFactory.CarType.Saab95));
         cc.cars.get(2).setCoordinates(0, 300);
         cc.cars.get(2).setDirection(60);
     }
@@ -60,6 +61,9 @@ public class CarController {
                 frame.drawPanel.repaint();
             }
         }
+    }
+    public void addCar(MotorVehicle car) {
+        cars.add(car);
     }
 
     private void attemptToMove(MotorVehicle car) {
