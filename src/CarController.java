@@ -30,10 +30,7 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
-        cc.cars.add(new Volvo240());
-        cc.cars.add(new Scania());
-        cc.cars.add(new Saab95());
-
+        initializeCars(cc);
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -42,42 +39,60 @@ public class CarController {
         cc.timer.start();
     }
 
+    private static void initializeCars(CarController cc) {
+        cc.cars.add(new Volvo240());
+        cc.cars.get(0).setCoordinates(45, 30);
+        cc.cars.get(0).setDirection(30);
+        cc.cars.add(new Scania());
+        cc.cars.get(1).setCoordinates(60, 40);
+        cc.cars.get(1).setDirection(40);
+        cc.cars.add(new Saab95());
+        cc.cars.get(2).setCoordinates(20, 10);
+        cc.cars.get(2).setDirection(0);
+    }
+
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (MotorVehicle car : cars) {
-
-                if (car.getX() < 0) {
-                    car.incDirection(180);
-                } else if (car.getY() < 0) {
-                    car.incDirection(180);
-                } else if (car.getX() > frame.getWidth() - 100) { // Image width
-                    car.incDirection(180);
-                } else if (car.getY() > frame.getHeight() - 300) { // Image height + control bar height
-                    car.incDirection(180);
-                }
-                try {
-                    car.move();
-                    int x = Math.round(car.getX());
-                    int y = Math.round(car.getY());
-                } catch (Exception ex) {
-                    System.out.println("Move error on " + car);
-                }
-                int x = Math.round(car.getX());
-                int y = Math.round(car.getY());
-
-
-
+                outOfBoundsCheck(car);
+                attemptToMove(car);
+                double x = Math.round(car.getX());
+                double y = Math.round(car.getY());
                 frame.drawPanel.moveit(car, x, y);
-
-
-                // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
         }
     }
+
+    private void attemptToMove(MotorVehicle car) {
+        try {
+            moveCar(car);
+        } catch (Exception ex) {
+            System.out.println("Move error on " + car);
+        }
+    }
+
+    private void outOfBoundsCheck(MotorVehicle car) {
+        if (car.getX() < 0) {
+            car.incDirection(180);
+        } else if (car.getY() < 0) {
+            car.incDirection(180);
+        } else if (car.getX() > frame.getWidth() - 100) { // Image width
+            car.incDirection(180);
+        } else if (car.getY() > frame.getHeight() - 300) { // Image height + control bar height
+            car.incDirection(180);
+        }
+    }
+
+    private void moveCar(MotorVehicle car) throws Exception {
+        car.move();
+        double x = car.getX();
+        double y = car.getY();
+    }
+
     void toggleEngineOn() {
         for (MotorVehicle car : cars) {
             car.toggleEngineOn();

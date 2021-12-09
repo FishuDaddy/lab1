@@ -1,24 +1,54 @@
-import java.awt.*;
+public class Position implements Rotatable {
+    private double x;
+    private double y;
+    private double direction;
 
-public class Position extends Point {
-    protected Point pos;
-    protected int dir;
-
-    public Position(int x, int y, int dir) {
-        this.pos = new Point(x, y);
-        this.dir = dir;
+    public void setCoordinates(double x, double y) {
+        this.x = x;
+        this.y = y;
     }
 
-    protected int getDirection() {
-        return dir;
+    public Position() {
+        this.x = 0;
+        this.y = 0;
+        this.direction = 0;
     }
-    protected void setDirection(int direction) {
-        dir = direction;
+    public Position(double x, double y, double direction) {
+        this.x = x;
+        this.y = y;
+        this.direction = direction;
     }
 
-    protected void incDirection(int direction) {
-        dir += direction;
-        dir %= 360;
+    @Override
+    public double getX() {
+        return x;
+    }
+
+    @Override
+    public double getY() {
+        return y;
+    }
+
+    protected void setX(double x) {
+        this.x = x;
+    }
+
+    protected void setY(double y) {
+        this.y = y;
+    }
+
+
+    @Override
+    public void setDirection(double direction) {
+        this.direction = direction;
+    }
+
+    @Override
+    public double getDirection() {
+        return direction;
+    }
+
+    protected void incDirection(double direction) {
+        this.direction = this.direction + direction;
     }
 }
-

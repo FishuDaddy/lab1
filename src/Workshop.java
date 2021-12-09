@@ -5,11 +5,12 @@
 public class Workshop<T extends Transportable> implements Mappable {
     private int x;
     private int y;
+    private Position pos;
     private Loadable loadable;
-    public int getX() {
+    public double getX() {
         return x;
     }
-    public int getY() {
+    public double getY() {
         return y;
     }
 
@@ -18,9 +19,8 @@ public class Workshop<T extends Transportable> implements Mappable {
      * @param x the x coordinate.
      * @param y the y coordinate.
      */
-    public void setCoordinates(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public void setCoordinates(double x, double y) {
+        pos.setCoordinates(x, y);
     }
     public Workshop(int x, int y, int threshold, int capacity, int maxWeight) {
         this.x = x;

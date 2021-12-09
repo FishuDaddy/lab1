@@ -30,7 +30,7 @@ abstract class TransportVehicle extends MotorVehicle {
      */
     @Override
     public void turnLeft(){
-        this.incDirection(45);
+        incDirection(45);
         for (Transportable transported : loadable.onTransport) {
             transported.setDirection(this.getDirection());
         }
@@ -40,7 +40,7 @@ abstract class TransportVehicle extends MotorVehicle {
      */
     @Override
     public void turnRight() {
-        this.incDirection(-45);
+        incDirection(-45);
         for (Transportable transported : loadable.onTransport) {
             transported.setDirection(this.getDirection());
         }
