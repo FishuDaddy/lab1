@@ -25,11 +25,7 @@ public class CarController {
     ArrayList<MotorVehicle> cars = new ArrayList<>();
 
     //methods:
-
-    public static void main(String[] args) {
-        // Instance of this class
-        CarController cc = new CarController();
-
+    public void start(CarController cc) {
         initializeCars(cc);
 
         // Start a new view and send a reference of self
@@ -38,17 +34,16 @@ public class CarController {
         // Start the timer
         cc.timer.start();
     }
-
     private static void initializeCars(CarController cc) {
         cc.cars.add(new Volvo240());
-        cc.cars.get(0).setCoordinates(45, 30);
+        cc.cars.get(0).setCoordinates(0, 100);
         cc.cars.get(0).setDirection(30);
         cc.cars.add(new Scania());
-        cc.cars.get(1).setCoordinates(60, 40);
+        cc.cars.get(1).setCoordinates(0, 200);
         cc.cars.get(1).setDirection(40);
         cc.cars.add(new Saab95());
-        cc.cars.get(2).setCoordinates(20, 10);
-        cc.cars.get(2).setDirection(0);
+        cc.cars.get(2).setCoordinates(0, 300);
+        cc.cars.get(2).setDirection(60);
     }
 
     /* Each step the TimerListener moves all the cars in the list and tells the
