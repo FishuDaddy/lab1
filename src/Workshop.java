@@ -35,7 +35,7 @@ public class Workshop<T extends Transportable> implements Mappable {
      */
     public void load(T target) throws Exception {
         if (loadable.loadableConditionsMet(this, target)) {
-            loadable.calculateLoad(target);
+            loadable.load(target);
         }
     }
 

@@ -93,7 +93,7 @@ public class Loadable {
      * Calculates and sets the variables for loading.
      * @param target the target to be loaded onto the Loadable.
      */
-    protected void calculateLoad(Transportable target) {
+    protected void load(Transportable target) {
         transportedWeight = transportedWeight + target.getWeight();
         currentTransportedVehicles = currentTransportedVehicles + 1;
         target.setBeingTransportState(true);

@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 abstract class TransportVehicle extends MotorVehicle {
     protected int transportedWeight;
     protected int maxWeight;
@@ -87,7 +85,7 @@ abstract class TransportVehicle extends MotorVehicle {
      */
     public void load(Transportable target) throws Exception {
         if (canLoad(target)) {
-            loadable.calculateLoad(target);
+            loadable.load(target);
         }
     }
 
