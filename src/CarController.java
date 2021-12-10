@@ -11,7 +11,11 @@ import java.util.ArrayList;
  */
 
 public class CarController {
+    protected ArrayList<MotorVehicle> cars;
 
+    public CarController(ArrayList<MotorVehicle> cars) {
+        this.cars = cars;
+    }
     void toggleEngineOn() {
         for (MotorVehicle car : cars) {
             car.toggleEngineOn();

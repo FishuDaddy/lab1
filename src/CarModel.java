@@ -9,22 +9,29 @@ public class CarModel {
     private final int delay = 50;
     // The timer is started with a listener (see below) that executes the statements
     // each step between delays.
-    private final Timer timer = new Timer(delay, new TimerListener());
+    private final Timer timer;
 
     // The frame that represents this instance View of the MVC pattern
-    private CarView frame;
-    private CarController cc;
+    private final CarView frame;
+    private final CarController cc;
     // A list of cars, modify if needed
     protected ArrayList<MotorVehicle> cars = new ArrayList<>();
     protected CarFactory carFactory = new CarFactory();
 
-    public void start(CarController cc) throws Exception {
-        initializeCars();
+    public CarModel() {
+
+        try {
+            initializeCars();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         // Start a new view and send a reference of self
+        cc = new CarController(cars);
         frame = new CarView("CarSim 1.0", cc);
 
         // Start the timer
+        timer = new Timer(delay, new TimerListener());
         timer.start();
     }
 
@@ -77,6 +84,5 @@ public class CarModel {
         } else if (car.getY() > frame.getHeight() - 300) { // Image height + control bar height
             car.incDirection(180);
         }
-    }
     }
 }
