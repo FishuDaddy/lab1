@@ -49,16 +49,19 @@ public class CarModel {
     }
 
     protected void initializeCars() throws Exception {
-        cars.add(carFactory.getCar(CarFactory.CarType.Volvo240));
-        cars.get(0).setCoordinates(0, 100);
-        cars.get(0).setDirection(30);
-        cars.add(carFactory.getCar(CarFactory.CarType.Scania));
-        cars.get(1).setCoordinates(0, 200);
-        cars.get(1).setDirection(40);
-        cars.add(carFactory.getCar(CarFactory.CarType.Saab95));
-        cars.get(2).setCoordinates(0, 300);
-        cars.get(2).setDirection(60);
+        addCar(CarFactory.CarType.Volvo240);
+        addCar(CarFactory.CarType.Scania);
+        addCar(CarFactory.CarType.Saab95);
+        for (int i=0; i<cars.size(); i++) {
+            cars.get(i).setCoordinates(0, i*100);
+            cars.get(i).setDirection(20 + (i * 20));
+        }
     }
+
+    private void addCar(CarFactory.CarType car) throws Exception {
+        cars.add(carFactory.getCar(car));
+    }
+
 
     private void attemptToMove(MotorVehicle car) {
         try {
@@ -70,8 +73,8 @@ public class CarModel {
 
     private void moveCar(MotorVehicle car) throws Exception {
         car.move();
-        double x = car.getX();
-        double y = car.getY();
+        //double x = car.getX();
+        //double y = car.getY();
     }
 
     private void outOfBoundsCheck(MotorVehicle car) {
