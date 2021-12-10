@@ -72,7 +72,7 @@ public class Scania extends TransportVehicle {
     @Override
     protected boolean modelSpecificConditionsMet(Transportable target) {
         if (platformRaised) {
-            return !(target instanceof MotorVehicle);
+            return !(target instanceof Container);
         } else return false;
     }
 }
