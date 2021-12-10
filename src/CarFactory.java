@@ -6,7 +6,7 @@ public class CarFactory {
         Scania
     }
 
-    public MotorVehicle getCar(CarType type) throws Exception {
+    protected MotorVehicle getCar(CarType type) throws Exception {
         switch (type) {
             case Volvo240 -> {
                 return new Volvo240();
