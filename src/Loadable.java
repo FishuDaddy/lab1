@@ -12,7 +12,7 @@ public class Loadable {
     protected int transportedWeight;
     private final boolean isOrderDependent;
     private final int maxWeight;
-    ArrayList<Transportable> onTransport;
+    protected ArrayList<Transportable> onTransport;
 
     /**
      * Constructor for Loadable
